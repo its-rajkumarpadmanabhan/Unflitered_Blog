@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R Rajkumar Padmanabhan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="beam"></div>
+
+  <header class="cover">
+    <div class="cover-inner">
+      <div class="identity">
+        <img src="profile.jpg" alt="R Rajkumar Padmanabhan" class="avatar">
+        <div class="identity-text">
+          <h1 class="name">R Rajkumar Padmanabhan</h1>
+          <p class="tagline">Notes on things I'm building, breaking, and figuring out.</p>
+        </div>
+      </div>
+      <nav class="socials" aria-label="Social links">
+        <a href="https://www.instagram.com/i.rajkumar__/" title="Instagram">IG</a>
+        <a href="mailto:collabwithrajkumar@gmail.com" title="Email">@</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <section class="feed" aria-label="Journal entries">
+      <div class="feed-head">
+        <h2>Unfiltered Journal</h2>
+        <div class="feed-head-right">
+          <input type="search" id="search-input" class="search-input" placeholder="Search entries…" aria-label="Search journal entries">
+          <span class="feed-sub">Newest first</span>
+        </div>
+      </div>
+
+      <div id="posts" class="posts">
+        <!-- posts render here from content.json -->
+        <p class="empty-state">Loading entries…</p>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+       <div class="card">
+        <h3>Quotes Of The Day</h3>
+        <p class="hint">Don't judge<code> each day </code> by the harvest you reap but by the seeds <code>that you plant.</code>" — Robert Louis Stevenson </p>
+      </div>
+
+
+      <div class="card about-card">
+        <h3>About</h3>
+        <p id="about-text">Hey, I'm R Rajkumar Padmanabhan. This is where I write down what I'm working on and thinking about, unfiltered.</p>
+        <ul class="meta-list">
+          <li><span>Based in</span><strong>India, Kerala</strong></li>
+          <li><span>Joined</span><strong>2026</strong></li>
+          <li><span>Entries</span><strong id="entry-count">–</strong></li>
+        </ul>
+      </div>
+
+      
+    </aside>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Built and written by R Rajkumar Padmanabhan. Hosted on GitHub Pages.</p>
+  </footer>
+
+<!-- One script tag per month file. Order doesn't matter — posts are sorted by date. -->
+<script src="about.js"></script>
+
+
+<script src="july.js"></script>
+<script src="june.js"></script>
+<script src="may.js"></script>
+<script src="april.js"></script>
+<script src="march.js"></script>
+<script src="feb.js"></script>
+<script src="jan.js"></script>
+
+
+<script src="script.js"></script>
+</body>
+</html>
