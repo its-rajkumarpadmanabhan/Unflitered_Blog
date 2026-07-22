@@ -1,3 +1,5 @@
+<img width="1899" height="939" alt="image" src="https://github.com/user-attachments/assets/360ad3e6-4822-4fb3-84b6-7e432c9530f5" />
+
 # Raj — Personal Journal
 
 A simple personal blog. Posts are split into one file per month inside the **`content/`** folder — e.g. `content/july.js` holds July's posts, `content/january.js` would hold January's. All of them get combined and shown together on the main page, newest first.
