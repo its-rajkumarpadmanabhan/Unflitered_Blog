@@ -63,4 +63,27 @@ window.SITE_POSTS.push(
   "image": "",
   "tags": ["continue"]
 },
+{
+  "date": "2026-07-25",
+  "title": "Beyond the Horizon",
+  "body": "Every horizon I've reached has revealed another waiting in the distance. Maybe success isn't about arriving—it's about never losing the courage to keep walking toward what's next.",
+  "image": "",
+  "tags": ["horizon"]
+},
+
+{
+  "date": "2026-07-28",
+  "title": "Small Steps",
+  "body": "I used to underestimate the power of ordinary days. Looking back, it wasn't the giant leaps that changed my life—it was the small steps I chose not to skip.",
+  "image": "",
+  "tags": ["progress"]
+},
+
+{
+  "date": "2026-07-31",
+  "title": "Tomorrow's Light",
+  "body": "The year has taught me that every ending carries the quiet promise of another sunrise. As long as hope lives within me, tomorrow will always have something worth waking up for.",
+  "image": "",
+  "tags": ["hope"]
+},
 );

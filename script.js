@@ -1,5 +1,7 @@
 const STORAGE_PREFIX = 'raj-blog:';
-const TICK_INTERVAL_MS = 5000;
+const LIKE_AUTO_INTERVAL_MS = 2 * 60 * 60 * 1000; // 2 hours — auto +10 likes
+const LIKE_AUTO_AMOUNT = 10;
+const POLL_INTERVAL_MS = 20 * 1000; // 20 seconds — check for new posts live, no reload
 
 let postStates = []; // [{ post, slug, likeBase, shareBase, liked }]
 
@@ -18,8 +20,11 @@ function loadContent() {
 
   if (window.SITE_ABOUT) aboutEl.textContent = window.SITE_ABOUT;
 
+  resetCountsIfNeeded();
+
   const posts = rawPosts.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
   countEl.textContent = posts.length;
+  checkForNewPosts(posts);
 
   if (posts.length === 0) {
     postsEl.innerHTML = '<p class="empty-state">No entries yet. Add one to a file in content/.</p>';
@@ -29,16 +34,28 @@ function loadContent() {
   // build persistent state for every post (counts loaded/initialized once here)
   postStates = posts.map((post, i) => {
     const slug = slugFor(post, i);
-    return {
+    const state = {
       post,
       slug,
-      likeBase: getGrowingCount(STORAGE_PREFIX + 'likes:' + slug),
-      shareBase: getGrowingCount(STORAGE_PREFIX + 'shares:' + slug),
+      likeBase: getGrowingCount(STORAGE_PREFIX + 'likes:' + slug, 105, 259),
+      shareBase: getGrowingCount(STORAGE_PREFIX + 'shares:' + slug, 105, 209),
       liked: getLikedState(STORAGE_PREFIX + 'liked:' + slug)
     };
+    applyLikeAutoIncrement(state);
+    return state;
   });
 
   renderList(postStates);
+
+  // while the page stays open, add 10 likes every 2 hours
+  setInterval(() => {
+    postStates.forEach(state => {
+      state.likeBase += LIKE_AUTO_AMOUNT;
+      localStorage.setItem(STORAGE_PREFIX + 'likes:' + state.slug, String(state.likeBase));
+      localStorage.setItem(STORAGE_PREFIX + 'likes-ts:' + state.slug, String(Date.now()));
+      updateCountsDisplay(state);
+    });
+  }, LIKE_AUTO_INTERVAL_MS);
 
   searchInput.addEventListener('input', () => {
     const term = searchInput.value.trim().toLowerCase();
@@ -50,8 +67,8 @@ function loadContent() {
     renderList(filtered, term);
   });
 
-  // simulate other visitors liking/sharing over time
-  setInterval(tickCounts, TICK_INTERVAL_MS);
+  // check live (without needing a refresh) for newly published posts
+  setInterval(pollForNewPosts, POLL_INTERVAL_MS);
 }
 
 function matchesSearch(post, term) {
@@ -83,17 +100,38 @@ function slugFor(post, index) {
 
 /* ---------- like / share stats ---------- */
 
-// Base count that quietly grows a little on every page load, simulating other
-// visitors. Starts somewhere above 128 the first time a post is ever shown.
-function getGrowingCount(key, min = 128, max = 260) {
+// One-time cleanup: wipes any like/share counts saved under old ranges so
+// every post regenerates fresh within 105-259 (likes) / 105-209 (shares).
+// Runs once per browser, guarded by COUNTS_RESET_KEY, then never again.
+const COUNTS_RESET_KEY = STORAGE_PREFIX + 'counts-reset-v2';
+function resetCountsIfNeeded() {
+  if (localStorage.getItem(COUNTS_RESET_KEY) === 'true') return;
+
+  Object.keys(localStorage).forEach(key => {
+    if (
+      key.startsWith(STORAGE_PREFIX + 'likes:') ||
+      key.startsWith(STORAGE_PREFIX + 'shares:') ||
+      key.startsWith(STORAGE_PREFIX + 'likes-ts:')
+    ) {
+      localStorage.removeItem(key);
+    }
+  });
+
+  localStorage.setItem(COUNTS_RESET_KEY, 'true');
+}
+
+// Base count, set once per post the first time it's ever shown (105-259 for
+// likes, 105-209 for shares) and otherwise left untouched on reload — only
+// clicks, or the 2-hour auto-bump below, change it after that.
+function getGrowingCount(key, min = 105, max = 209) {
   const stored = localStorage.getItem(key);
   let value;
   if (stored === null) {
     value = min + Math.floor(Math.random() * (max - min + 1));
+    localStorage.setItem(key, String(value));
   } else {
-    value = parseInt(stored, 10) + Math.floor(Math.random() * 5) + 1; // +1 to +5 each visit
+    value = parseInt(stored, 10);
   }
-  localStorage.setItem(key, String(value));
   return value;
 }
 
@@ -101,17 +139,27 @@ function getLikedState(key) {
   return localStorage.getItem(key) === 'true';
 }
 
-// runs every TICK_INTERVAL_MS to make counts feel alive after the first bump
-function tickCounts() {
-  postStates.forEach(state => {
-    const likeBump = Math.floor(Math.random() * 3) + 1; // +1 to +3
-    const shareBump = Math.floor(Math.random() * 2) + 1; // +1 to +2
-    state.likeBase += likeBump;
-    state.shareBase += shareBump;
+// adds 10 likes for every full 2-hour period that has elapsed in real time
+// since the last check — works even if the page was closed/reloaded
+function applyLikeAutoIncrement(state) {
+  const tsKey = STORAGE_PREFIX + 'likes-ts:' + state.slug;
+  const now = Date.now();
+  const storedTs = localStorage.getItem(tsKey);
+
+  if (storedTs === null) {
+    localStorage.setItem(tsKey, String(now));
+    return;
+  }
+
+  const elapsed = now - parseInt(storedTs, 10);
+  const periods = Math.floor(elapsed / LIKE_AUTO_INTERVAL_MS);
+
+  if (periods > 0) {
+    state.likeBase += periods * LIKE_AUTO_AMOUNT;
+    const newTs = parseInt(storedTs, 10) + periods * LIKE_AUTO_INTERVAL_MS;
     localStorage.setItem(STORAGE_PREFIX + 'likes:' + state.slug, String(state.likeBase));
-    localStorage.setItem(STORAGE_PREFIX + 'shares:' + state.slug, String(state.shareBase));
-    updateCountsDisplay(state);
-  });
+    localStorage.setItem(tsKey, String(newTs));
+  }
 }
 
 function updateCountsDisplay(state) {
@@ -230,4 +278,181 @@ function escapeAttr(str) {
   return escapeHtml(str).replace(/"/g, '&quot;');
 }
 
+/* ---------- notify on new post ---------- */
+// This is a static GitHub Pages site with no server, so there's no way to
+// wake a fully closed browser (that needs real Web Push + a backend). What
+// this DOES do, and does automatically: while this tab is open (even in the
+// background, even if you're on another app), it quietly re-checks your
+// content/*.js files every 20 seconds. The instant it finds a post that
+// wasn't there before, it fires a notification and drops the new post into
+// the feed — no refresh needed.
+
+function initNotifyButton() {
+  const notifyBtn = document.getElementById('notify-btn');
+  if (!notifyBtn) return;
+
+  const notifyKey = STORAGE_PREFIX + 'notify';
+  let isActive = localStorage.getItem(notifyKey) === 'true'
+    && 'Notification' in window
+    && Notification.permission === 'granted';
+
+  renderNotifyBtn();
+
+  notifyBtn.addEventListener('click', async () => {
+    if (isActive) {
+      isActive = false;
+      localStorage.setItem(notifyKey, 'false');
+      renderNotifyBtn();
+      return;
+    }
+
+    if (!('Notification' in window)) {
+      alert("This browser doesn't support notifications.");
+      return;
+    }
+
+    let permission = Notification.permission;
+    if (permission === 'default') {
+      permission = await Notification.requestPermission();
+    }
+
+    if (permission === 'granted') {
+      isActive = true;
+      localStorage.setItem(notifyKey, 'true');
+      new Notification('Notifications on', {
+        body: 'Keep this tab open and you\'ll get notified the moment a new entry goes up.'
+      });
+    } else {
+      alert('Notifications are blocked for this site. Enable them in your browser/site settings to turn this on.');
+    }
+    renderNotifyBtn();
+  });
+
+  function renderNotifyBtn() {
+    notifyBtn.textContent = isActive ? 'Notified ✓' : 'Notify';
+    notifyBtn.classList.toggle('is-active', isActive);
+    notifyBtn.setAttribute('aria-pressed', String(isActive));
+  }
+}
+
+// on initial load: compares today's posts to what this visitor last saw
+// (covers the case where they closed the browser and a post went up meanwhile)
+function checkForNewPosts(posts) {
+  const seenKey = STORAGE_PREFIX + 'seen-posts';
+  const currentSlugs = posts.map((post, i) => slugFor(post, i));
+  const storedSeen = localStorage.getItem(seenKey);
+
+  if (storedSeen === null) {
+    localStorage.setItem(seenKey, JSON.stringify(currentSlugs));
+    return;
+  }
+
+  let seenSlugs = [];
+  try { seenSlugs = JSON.parse(storedSeen); } catch (e) { /* ignore corrupt value */ }
+
+  const newPosts = posts.filter((post, i) => !seenSlugs.includes(currentSlugs[i]));
+  if (newPosts.length > 0) notifyNewPosts(newPosts);
+
+  localStorage.setItem(seenKey, JSON.stringify(currentSlugs));
+}
+
+function notifyNewPosts(posts) {
+  const notifyKey = STORAGE_PREFIX + 'notify';
+  const isActive = localStorage.getItem(notifyKey) === 'true';
+  const canNotify = 'Notification' in window && Notification.permission === 'granted';
+  if (!isActive || !canNotify) return;
+
+  if (posts.length === 1) {
+    new Notification('New post from R Rajkumar Padmanabhan', {
+      body: posts[0].title || 'A new entry was just posted.'
+    });
+  } else {
+    new Notification('New posts from R Rajkumar Padmanabhan', {
+      body: `${posts.length} new entries were just posted.`
+    });
+  }
+}
+
+// finds every content/*.js script tag on the page (except script.js/about.js)
+function getContentScriptSrcs() {
+  return Array.from(document.querySelectorAll('script[src]'))
+    .map(el => el.getAttribute('src'))
+    .filter(src => src && !src.endsWith('script.js') && !/about\.js$/i.test(src));
+}
+
+// re-fetches every content file fresh (bypassing cache) and re-runs it
+// against a sandboxed fake `window` to pull out the current SITE_POSTS array,
+// without disturbing the real page state
+async function fetchLatestPosts() {
+  const srcs = getContentScriptSrcs();
+  const fakeWindow = { SITE_POSTS: [] };
+
+  await Promise.all(srcs.map(async (src) => {
+    try {
+      const bustCache = src + (src.includes('?') ? '&' : '?') + '_=' + Date.now();
+      const res = await fetch(bustCache, { cache: 'no-store' });
+      if (!res.ok) return;
+      const code = await res.text();
+      const runInFakeWindow = new Function('window', code);
+      runInFakeWindow(fakeWindow);
+    } catch (e) {
+      // one file failing (e.g. offline) shouldn't break the rest
+    }
+  }));
+
+  return fakeWindow.SITE_POSTS;
+}
+
+// runs every POLL_INTERVAL_MS: checks for brand-new posts, adds them to the
+// live feed, and notifies — all without a page refresh
+async function pollForNewPosts() {
+  let latestRaw;
+  try {
+    latestRaw = await fetchLatestPosts();
+  } catch (e) {
+    return;
+  }
+  if (!latestRaw || !latestRaw.length) return;
+
+  const sorted = latestRaw.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+  const knownSlugs = new Set(postStates.map(s => s.slug));
+  const brandNew = [];
+
+  sorted.forEach((post, i) => {
+    const slug = slugFor(post, i);
+    if (!knownSlugs.has(slug)) brandNew.push({ post, slug });
+  });
+
+  if (brandNew.length === 0) return;
+
+  brandNew.forEach(({ post, slug }) => {
+    postStates.push({
+      post,
+      slug,
+      likeBase: getGrowingCount(STORAGE_PREFIX + 'likes:' + slug, 105, 259),
+      shareBase: getGrowingCount(STORAGE_PREFIX + 'shares:' + slug, 105, 209),
+      liked: getLikedState(STORAGE_PREFIX + 'liked:' + slug)
+    });
+  });
+
+  postStates.sort((a, b) => new Date(b.post.date) - new Date(a.post.date));
+
+  const countEl = document.getElementById('entry-count');
+  if (countEl) countEl.textContent = postStates.length;
+
+  const searchInput = document.getElementById('search-input');
+  const term = searchInput ? searchInput.value.trim().toLowerCase() : '';
+  if (term) {
+    renderList(postStates.filter(s => matchesSearch(s.post, term)), term);
+  } else {
+    renderList(postStates);
+  }
+
+  notifyNewPosts(brandNew.map(b => b.post));
+
+  const seenKey = STORAGE_PREFIX + 'seen-posts';
+  localStorage.setItem(seenKey, JSON.stringify(postStates.map(s => s.slug)));
+}
+
 loadContent();
+initNotifyButton();

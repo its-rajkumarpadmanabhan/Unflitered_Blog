@@ -7,6 +7,27 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+  .notify-btn {
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.4em 1em;
+    border-radius: 999px;
+    border: 1px solid currentColor;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    margin-right: 0.5em;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .notify-btn:hover { opacity: 0.85; }
+  .notify-btn.is-active {
+    background-color: #111;
+    color: #fff;
+    border-color: #111;
+  }
+</style>
 </head>
 <body>
 
@@ -22,6 +43,7 @@
         </div>
       </div>
       <nav class="socials" aria-label="Social links">
+        <button id="notify-btn" class="notify-btn" type="button" title="Get notified about new posts">Notify</button>
         <a href="https://www.instagram.com/i.rajkumar__/" title="Instagram">IG</a>
         <a href="mailto:collabwithrajkumar@gmail.com" title="Email">@</a>
       </nav>
@@ -74,7 +96,7 @@
 <!-- One script tag per month file. Order doesn't matter — posts are sorted by date. -->
 <script src="about.js"></script>
 
-
+<script src="aug.js"></script>
 <script src="july.js"></script>
 <script src="june.js"></script>
 <script src="may.js"></script>
