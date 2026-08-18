@@ -86,4 +86,73 @@ window.SITE_POSTS.push(
   "image": "",
   "tags": ["hope"]
 },
+
+// ===============================
+// July 2025
+// Theme: Restlessness, Dreams & Finding Direction
+// ===============================
+
+{
+  "date": "2025-07-03",
+  "title": "Somewhere Ahead",
+  "body": "I don't know exactly where I'm going yet, but something inside me keeps saying there is more waiting ahead. Maybe not knowing is part of the journey.",
+  "image": "",
+  "tags": ["direction"]
+},
+
+{
+  "date": "2025-07-07",
+  "title": "Restless Nights",
+  "body": "Some nights are filled with thoughts of everything I want to become. Sleep feels distant when the mind is busy imagining a life that hasn't happened yet.",
+  "image": "",
+  "tags": ["dreams"]
+},
+
+{
+  "date": "2025-07-11",
+  "title": "A Different Road",
+  "body": "Maybe the road I imagined for myself was never the one I was meant to take. Sometimes getting lost is simply life making room for a different destination.",
+  "image": "",
+  "tags": ["journey"]
+},
+
+{
+  "date": "2025-07-15",
+  "title": "Quiet Ambition",
+  "body": "Not every dream needs to be announced. Some dreams grow better in silence, protected by patience until the day they are finally ready to become real.",
+  "image": "",
+  "tags": ["ambition"]
+},
+
+{
+  "date": "2025-07-19",
+  "title": "Still Searching",
+  "body": "I'm still trying to understand what I truly want from life. Perhaps finding yourself isn't one great discovery, but hundreds of small realizations along the way.",
+  "image": "",
+  "tags": ["searching"]
+},
+
+{
+  "date": "2025-07-23",
+  "title": "One Step",
+  "body": "I don't need to see the entire path tonight. One step is enough. Tomorrow can reveal the next one when I'm ready to take it.",
+  "image": "",
+  "tags": ["progress"]
+},
+
+{
+  "date": "2025-07-27",
+  "title": "The Dream Within",
+  "body": "Some dreams stay alive even after years of doubt. Maybe the ones that refuse to disappear are the ones worth listening to.",
+  "image": "",
+  "tags": ["vision"]
+},
+
+{
+  "date": "2025-07-31",
+  "title": "Keep Looking",
+  "body": "I may not have found the answer yet, but I'm still looking. And perhaps there is something beautiful about continuing to search without giving up on yourself.",
+  "image": "",
+  "tags": ["hope"]
+}
 );
