@@ -114,5 +114,28 @@ window.SITE_POSTS.push(
     "body": "Another month is ending, and I can feel something changing inside me. I don't know what the next chapter holds, but I'm no longer afraid to open it.",
     "image": "",
     "tags": ["chapter"]
+  },
+    {
+    "date": "2026-08-22",
+    "title": "The Quiet Journey",
+    "body": "Not every journey needs to be understood by everyone. Some paths are meant to be walked quietly, with faith in where they might eventually lead.",
+    "image": "",
+    "tags": ["journey"]
+  },
+
+  {
+    "date": "2026-08-26",
+    "title": "Grateful for Today",
+    "body": "I've started appreciating the things I once overlooked—the peaceful mornings, familiar faces, and ordinary moments that quietly make life beautiful.",
+    "image": "",
+    "tags": ["gratitude"]
+  },
+
+  {
+    "date": "2026-08-30",
+    "title": "Still Becoming",
+    "body": "I don't have everything figured out, and I'm finally okay with that. I'm still learning, still growing, and still becoming someone I can be proud of.",
+    "image": "",
+    "tags": ["becoming"]
   }
 )
