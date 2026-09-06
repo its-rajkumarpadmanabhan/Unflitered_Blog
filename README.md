@@ -1,92 +1,118 @@
 <img width="1899" height="939" alt="image" src="https://github.com/user-attachments/assets/360ad3e6-4822-4fb3-84b6-7e432c9530f5" />
 
-# Raj — Personal Journal
+# Migration Plan: Firebase Firestore, Admin Panel & Capacitor APK
 
-A simple personal blog. Posts are split into one file per month inside the **`content/`** folder — e.g. `content/july.js` holds July's posts, `content/january.js` would hold January's. All of them get combined and shown together on the main page, newest first.
+Migrate the static, month-file-based blog into a dynamic, real-time Firestore-backed application with Firebase Authentication, an Admin Drawer for post creation & deletion, real Firestore likes, and a Capacitor Android app container.
 
-## Files
+## User Review Required
 
-```
-index.html            the page
-style.css             styling
-script.js             combines every content/*.js file and draws the posts
-content/
-  about.js            your bio, shown in the sidebar
-  july.js             July's posts
-  template-month.js   copy this to start a new month
-assets/
-  profile.jpg          your photo, shown in the header
-```
+> [!IMPORTANT]
+> **Firebase API Key & Credentials**
+> In the configuration provided:
+> ```javascript
+> const firebaseConfig = {
+>   apiKey: "YOUR_API_KEY",
+>   authDomain: "unfiltered-journal-b146e.firebaseapp.com",
+>   projectId: "unfiltered-journal-b146e",
+>   storageBucket: "unfiltered-journal-b146e.appspot.com",
+>   messagingSenderId: "...",
+>   appId: "..."
+> };
+> ```
+> We will configure a dedicated, clean config file `firebase-config.js` (or in `script.js`) where you can easily verify or paste your complete Firebase Web App configuration from your Firebase Console.
+>
+> **Existing Posts Preservation**:
+> We will provide a built-in one-click "Seed Existing Posts" button in the Admin view (and a CLI migration script `seed.js`) that imports all 12 existing monthly posts (`jan.js` - `dec.js`) into Firestore automatically so your journal is immediately populated.
 
-## Adding a new post to an existing month
+---
 
-Open the matching file, e.g. `content/july.js`, and add an object to the array passed to `.push(...)`:
+## Proposed Changes
 
-```js
-{
-  "date": "2026-07-22",
-  "title": "My new post",
-  "body": "Whatever you want to say.",
-  "image": "assets/some-photo.jpg",
-  "tags": ["life", "code"]
-},
-```
+### Phase 1: Modularize & Connect Firestore in `script.js`
+Replace static script file loading and local polling loops with Firebase Firestore real-time snapshot listeners.
 
-- `date` — used to sort posts, newest first. Format: `YYYY-MM-DD`.
-- `title` — post heading.
-- `body` — the post text.
-- `image` — optional. Path to an image (drop it in `assets/` and reference it here). Leave as `""` to skip.
-- `tags` — optional list of short labels shown under the post.
+#### [NEW] [firebase-config.js](file:///c:/Users/user/Desktop/Unflitered_Blog/firebase-config.js)
+- Holds the Firebase configuration object and initializes Firebase App, Auth, and Firestore instances using CDN ES modules (`firebasejs/10.8.0`).
+- Exports `app`, `auth`, `db`, and helper methods.
 
-Make sure there's a comma between post objects (it's a JavaScript array, not raw JSON). Save the file and reload the page.
+#### [MODIFY] [script.js](file:///c:/Users/user/Desktop/Unflitered_Blog/script.js)
+- Convert to ES Module (`<script type="module" src="script.js">`).
+- Replace `loadContent` / static month array iteration with real-time `onSnapshot(query(collection(db, "posts"), orderBy("date", "desc")))`.
+- Keep the instant search filtering, date formatting, and bio display.
+- Retain backwards-compatibility so if Firestore is offline or still being configured, it can fall back gracefully.
 
-## Starting a new month
+---
 
-1. Copy `content/template-month.js` to a new file named after the month, e.g. `content/january.js`.
-2. Fill in its posts array following the same format as above.
-3. Open `index.html` and add a script tag for it, next to the others:
-   ```html
-   <script src="content/about.js"></script>
-   <script src="content/july.js"></script>
-   <script src="content/january.js"></script>
-   <script src="script.js"></script>
-   ```
-4. Save both files and reload — the new month's posts appear mixed in with everything else, sorted by date automatically. Order of the script tags doesn't matter.
+### Phase 2: Admin Post Creation & Authentication Controls
 
-To change your bio, edit `content/about.js`.
+#### [MODIFY] [index.html](file:///c:/Users/user/Desktop/Unflitered_Blog/index.html)
+- Remove the obsolete `<script src="[month].js">` tags (posts now come directly from Firestore).
+- Change `<script src="script.js">` to `<script type="module" src="script.js"></script>`.
+- Add the **Floating Action Trigger Button** (`#admin-login-toggle`) for opening the admin panel.
+- Add the **Admin Drawer** (`#admin-drawer`):
+  - **Auth View** (`#admin-auth-view`): Email and password inputs, Login button.
+  - **Editor View** (`#admin-editor-view`): Title, tags, body textarea, "Publish" button, "Seed Existing Posts" button, and "Logout" button.
 
-To change your photo, replace `assets/profile.jpg` with a new image (keep the same filename, or update the `src` in `index.html`).
+#### [MODIFY] [style.css](file:///c:/Users/user/Desktop/Unflitered_Blog/style.css)
+- Add styles for:
+  - `.admin-fab`: Floating action button with subtle glow and `--panel-2` styling.
+  - `.admin-drawer`: Elegant sliding or anchored modal panel using `--panel`, `--hair` border, and `--amber` focus states.
+  - `.delete-btn`: Hidden by default (`display: none`), visible only when `body.is-admin` is active.
+  - Form controls inside the admin drawer adhering to the warm paper & amber palette.
 
-## Hosting on GitHub Pages
+---
 
-1. Create a new repository on GitHub (e.g. `raj-journal`).
-2. Push these files to the repo root:
-   ```
-   git init
-   git add .
-   git commit -m "Initial blog"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/<repo-name>.git
-   git push -u origin main
-   ```
-3. On GitHub: go to **Settings → Pages**.
-4. Under **Build and deployment**, set **Source** to `Deploy from a branch`, branch `main`, folder `/ (root)`. Save.
-5. GitHub gives you a URL like `https://<your-username>.github.io/<repo-name>/` — that's your live site.
+### Phase 3: Dynamic Post Cards with Real Actions & Security
 
-From then on, every time you edit a file in `content/` (or add photos to `assets/`) and push to GitHub, the live site updates within a minute or two — no separate "upload" step required.
+#### [MODIFY] [script.js](file:///c:/Users/user/Desktop/Unflitered_Blog/script.js)
+- **Like button**:
+  - Interacts directly with Firestore: `updateDoc(doc(db, "posts", post.id), { likesCount: increment(1) })`
+  - Protects against duplicate clicks per visitor via `localStorage`.
+- **Share button**:
+  - Keeps native Web Share API with clipboard copy fallback.
+- **Delete button**:
+  - Embedded into each post card: `<button class="action-btn delete-btn" data-id="${post.id}">Delete</button>`.
+  - Prompts user confirmation and runs `deleteDoc(doc(db, "posts", id))`.
+- **Admin Auth State**:
+  - `onAuthStateChanged(auth, user)` toggles `body.is-admin`, switching the admin drawer between login view and editor view.
 
-## Like / share counts
+---
 
-Every post gets a like button and a share button. Counts start somewhere above 128 the first time a post is shown, tick up a little on each page load, and then keep climbing on their own every 5 seconds while the page stays open — so the site feels alive rather than static. They're stored in the visitor's own browser (`localStorage`), so:
+### Phase 4: Native APK Packaging (Capacitor)
 
-- Clicking **Like** adds exactly 1 and turns the heart solid; clicking again removes it.
-- Clicking **Share** adds 1 each time, copies a link to that post (or opens the device's native share sheet on mobile), and can be clicked repeatedly.
-- Counts are per-visitor — everyone sees their own growing numbers, since this is a static site with no shared backend. If you want one real, shared counter across all visitors later, that would need a small backend or a service like Firebase — just ask and I can wire that in.
+#### [NEW] [my-blog-apk/](file:///c:/Users/user/Desktop/Unflitered_Blog/my-blog-apk/)
+- Create the target Capacitor folder structure:
+  ```
+  my-blog-apk/
+  ├── package.json
+  └── www/
+      ├── index.html
+      ├── style.css
+      ├── script.js
+      ├── firebase-config.js
+      ├── about.js
+      └── profile.jpg
+  ```
+- Run `npm init -y` and install `@capacitor/core`, `@capacitor/cli`, and `@capacitor/android`.
+- Initialize Capacitor app with app ID `com.unfilteredjournal.blog` and web dir `www`.
+- Add the Android platform (`npx cap add android`) and sync web assets (`npx cap copy android`).
 
-## Search
+---
 
-There's a search box next to "Newest first" above the journal feed. Typing filters posts live, matching against the title, body text, and tags of every entry across all your `content/*.js` files — no page reload, no server. Clear the box to see everything again.
+## Verification Plan
 
-## Note on local previews
+### Automated & Build Verification
+1. **Lint & Module Syntax**: Check for any JavaScript syntax or module import errors.
+2. **Capacitor Android Project Generation**:
+   - Run `npx cap copy android` inside `my-blog-apk` to ensure all assets and configs are compiled.
+   - Verify that `my-blog-apk/android/` contains the valid Gradle build structure.
+
+### Manual Verification
+1. **Web App**:
+   - Verify page renders correctly with the new ES module structure.
+   - Test admin drawer toggle button opens and closes properly.
+   - Check that `.delete-btn` is hidden when logged out and appears when logged in.
+2. **Firestore Real-time Sync**:
+   - Verify that publishing or deleting a post updates the UI in real-time via `onSnapshot`.
 
 Double-clicking `index.html` on your computer works fine for previewing, since every file in `content/` is loaded as a plain script rather than fetched. (An earlier version of this site used a single `content.json` with `fetch()`, which browsers block when opening files locally with `file://` — that's why posts live in `content/*.js` script files instead.)
