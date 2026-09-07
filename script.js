@@ -39,7 +39,7 @@ const StatusBar = Plugins.StatusBar;
 const Haptics = Plugins.Haptics;
 const CapShare = Plugins.Share;
 const Preferences = Plugins.Preferences;
-const PushNotifications = Plugins.PushNotifications;
+const LocalNotifications = Plugins.LocalNotifications;
 
 let postStates = []; // [{ id, post, slug, liked }]
 
@@ -117,7 +117,6 @@ async function initApp() {
   setupAdminControls();
   setupEditModal();
   initNotifyButton();
-  setupPushNotifications();
   updateSavedCountBadge();
 
   // 1. Immediately render all archived blogs out of the box
@@ -1152,28 +1151,48 @@ function showToast(message, duration = 3500) {
   }, duration);
 }
 
-// ---------------- Post Notification Dispatcher ----------------
-function dispatchPostNotification(post) {
+// ---------------- Post Notification Dispatcher (Crash-Proof) ----------------
+async function dispatchPostNotification(post) {
   if (!post) return;
   const postTitle = post.title || 'Untitled Entry';
   const postSnippet = post.body
     ? (post.body.slice(0, 90).trim() + (post.body.length > 90 ? '...' : ''))
     : 'A new unfiltered journal entry is live.';
 
-  // In-app alert
+  // 1. In-app toast alert (always works safely across web & mobile)
   showToast(`📝 New Post: "${postTitle}"`);
 
-  // System/Browser Push Notification
   const isSubscribed = localStorage.getItem(STORAGE_PREFIX + 'notify') === 'true';
-  if (isSubscribed && 'Notification' in window && Notification.permission === 'granted') {
+  if (!isSubscribed) return;
+
+  // 2. Native Android Local Notification (System status bar alert)
+  if (LocalNotifications) {
+    try {
+      await LocalNotifications.schedule({
+        notifications: [{
+          id: Math.floor(Math.random() * 1000000) + 1,
+          title: `New Post: ${postTitle}`,
+          body: postSnippet,
+          schedule: { at: new Date(Date.now() + 100) },
+          smallIcon: 'ic_launcher_foreground',
+          iconColor: '#e8a34d'
+        }]
+      });
+      return;
+    } catch (e) {
+      console.warn("LocalNotifications error:", e);
+    }
+  }
+
+  // 3. Web Notification API (Standard desktop/laptop browsers only, never in native webview)
+  const isNative = window.Capacitor?.isNativePlatform?.();
+  if (!isNative && 'Notification' in window && Notification.permission === 'granted') {
     try {
       const notif = new Notification(`New Post: ${postTitle}`, {
         body: postSnippet,
         icon: 'profile.png',
-        badge: 'profile.png',
         tag: 'post-' + (post.id || post.slug || Date.now())
       });
-
       notif.onclick = () => {
         window.focus();
         const targetId = post.id || post.slug;
@@ -1181,12 +1200,12 @@ function dispatchPostNotification(post) {
         if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       };
     } catch (e) {
-      console.warn("Notification display:", e);
+      console.warn("Web notification display error:", e);
     }
   }
 }
 
-// ---------------- User Notification Subscription ----------------
+// ---------------- User Notification Subscription (Safe & Dual-Platform) ----------------
 function initNotifyButton() {
   const notifyBtn = document.getElementById('notify-btn');
   if (!notifyBtn) return;
@@ -1213,77 +1232,56 @@ function initNotifyButton() {
       return;
     }
 
-    // Attempt Native Capacitor Push if available
-    if (PushNotifications) {
+    // Activating Notifications
+    isActive = true;
+    localStorage.setItem(notifyKey, 'true');
+    renderNotifyBtn();
+
+    const isNative = window.Capacitor?.isNativePlatform?.();
+
+    // 1. Native Android App: Use safe LocalNotifications (Never crashes)
+    if (LocalNotifications) {
       try {
-        let perm = await PushNotifications.checkPermissions();
-        if (perm.receive !== 'granted') {
-          perm = await PushNotifications.requestPermissions();
-        }
-        if (perm.receive === 'granted') {
-          await PushNotifications.register();
-          isActive = true;
-          localStorage.setItem(notifyKey, 'true');
-          renderNotifyBtn();
-          showToast("🔔 Subscribed! You'll be alerted when new blogs go live.");
-          return;
+        const perm = await LocalNotifications.requestPermissions();
+        if (perm && perm.display === 'granted') {
+          await LocalNotifications.schedule({
+            notifications: [{
+              id: 9999,
+              title: 'Unfiltered Journal',
+              body: "Notifications enabled! You will be alerted when a new post is published.",
+              schedule: { at: new Date(Date.now() + 200) },
+              smallIcon: 'ic_launcher_foreground',
+              iconColor: '#e8a34d'
+            }]
+          });
         }
       } catch (e) {
-        console.warn("Capacitor Push Notifications error:", e);
+        console.warn("LocalNotifications setup:", e);
       }
-    }
-
-    // Web Notification API
-    if (!('Notification' in window)) {
-      isActive = true;
-      localStorage.setItem(notifyKey, 'true');
-      renderNotifyBtn();
-      showToast("🔔 Subscribed! (In-app notifications enabled)");
+      showToast("🔔 Subscribed! You'll be alerted when new blogs go live.");
       return;
     }
 
-    let permission = Notification.permission;
-    if (permission === 'default') {
-      permission = await Notification.requestPermission();
-    }
-
-    if (permission === 'granted') {
-      isActive = true;
-      localStorage.setItem(notifyKey, 'true');
-      renderNotifyBtn();
-      showToast("🔔 Subscribed! You'll be alerted when new blogs are uploaded.");
-
-      // Send instant welcome confirmation notification
+    // 2. Web Browser Notification API
+    if (!isNative && 'Notification' in window) {
       try {
-        new Notification("R Rajkumar Padmanabhan — Unfiltered Journal", {
-          body: "Notifications enabled! You will be notified whenever Rajkumar publishes a new unfiltered post.",
-          icon: "profile.png",
-          badge: "profile.png"
-        });
-      } catch (e) { /* ignore */ }
-    } else {
-      showToast("⚠️ Notifications are blocked in browser settings. Please allow notifications.");
+        let permission = Notification.permission;
+        if (permission === 'default') {
+          permission = await Notification.requestPermission();
+        }
+        if (permission === 'granted') {
+          new Notification("R Rajkumar Padmanabhan — Unfiltered Journal", {
+            body: "Notifications enabled! You will be alerted whenever Rajkumar publishes a new unfiltered post.",
+            icon: "profile.png"
+          });
+        }
+      } catch (e) {
+        console.warn("Web Notification error:", e);
+      }
     }
+
+    showToast("🔔 Subscribed! You'll be alerted when new blogs are uploaded.");
   });
-}
-
-function setupPushNotifications() {
-  if (!PushNotifications) return;
-  try {
-    PushNotifications.addListener('registration', (token) => {
-      console.log('Push registration success:', token.value);
-    });
-
-    PushNotifications.addListener('pushNotificationReceived', (notification) => {
-      showToast(`🔔 ${notification.title || 'New Post'}: ${notification.body || ''}`);
-    });
-
-    PushNotifications.addListener('pushNotificationActionPerformed', (notification) => {
-      console.log('Push notification action performed:', notification.actionId);
-    });
-  } catch (e) {
-    console.warn("PushNotifications listener error:", e);
-  }
 }
 
 // Start app
