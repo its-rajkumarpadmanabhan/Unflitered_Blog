@@ -1,0 +1,1172 @@
+export const INITIAL_POSTS = [
+  {
+    "date": "2026-09-07",
+    "title": "Here, Today",
+    "body": "There is always another goal waiting, another place to reach, another version of myself to become. But today, I want to appreciate the person standing here before rushing toward who I might be tomorrow.",
+    "image": "",
+    "tags": [
+      "present"
+    ]
+  },
+  {
+    "date": "2026-09-06",
+    "title": "Trust the Pace",
+    "body": "I used to compare my journey with everyone else's. Now I'm learning that life doesn't have a universal timeline. Maybe I'm exactly where I need to be.",
+    "image": "",
+    "tags": [
+      "trust"
+    ]
+  },
+  {
+    "date": "2026-09-05",
+    "title": "Less Noise",
+    "body": "I've started choosing quiet over unnecessary noise. There is something peaceful about no longer feeling the need to explain every choice you make.",
+    "image": "",
+    "tags": [
+      "quiet"
+    ]
+  },
+  {
+    "date": "2026-09-04",
+    "title": "Different Eyes",
+    "body": "The world hasn't changed as much as I thought. Maybe I have. Sometimes growing means looking at the same life with completely different eyes.",
+    "image": "",
+    "tags": [
+      "perspective"
+    ]
+  },
+  {
+    "date": "2026-09-03",
+    "title": "Give It Time",
+    "body": "Not everything needs to happen today. Some dreams need patience, some wounds need time, and some answers arrive only when we're ready to hear them.",
+    "image": "",
+    "tags": [
+      "patience"
+    ]
+  },
+  {
+    "date": "2026-09-02",
+    "title": "Clearer Now",
+    "body": "Some things only make sense after you've walked far enough away from them. Distance has a way of turning confusion into clarity.",
+    "image": "",
+    "tags": [
+      "clarity"
+    ]
+  },
+  {
+    "date": "2026-09-01",
+    "title": "A New September",
+    "body": "September arrived quietly, carrying the feeling of a fresh page. I don't know what this month will bring, but I'm learning to welcome the unknown without needing all the answers.",
+    "image": "",
+    "tags": [
+      "september"
+    ]
+  },
+  {
+    "date": "2026-08-30",
+    "title": "Still Becoming",
+    "body": "I don't have everything figured out, and I'm finally okay with that. I'm still learning, still growing, and still becoming someone I can be proud of.",
+    "image": "",
+    "tags": [
+      "becoming"
+    ]
+  },
+  {
+    "date": "2026-08-26",
+    "title": "Grateful for Today",
+    "body": "I've started appreciating the things I once overlooked—the peaceful mornings, familiar faces, and ordinary moments that quietly make life beautiful.",
+    "image": "",
+    "tags": [
+      "gratitude"
+    ]
+  },
+  {
+    "date": "2026-08-22",
+    "title": "The Quiet Journey",
+    "body": "Not every journey needs to be understood by everyone. Some paths are meant to be walked quietly, with faith in where they might eventually lead.",
+    "image": "",
+    "tags": [
+      "journey"
+    ]
+  },
+  {
+    "date": "2026-08-18",
+    "title": "Morning Promise",
+    "body": "Every sunrise reminds me that life doesn't ask us to be perfect. It only asks us to keep showing up with hope, even when yesterday felt heavier than today.",
+    "image": "",
+    "tags": [
+      "sunrise"
+    ]
+  },
+  {
+    "date": "2026-08-15",
+    "title": "The Life I'm Building",
+    "body": "I may not have everything I once imagined, but I have something better—a life that is slowly becoming my own. And for the first time, I'm learning to appreciate the process.",
+    "image": "",
+    "tags": [
+      "purpose"
+    ]
+  },
+  {
+    "date": "2026-08-12",
+    "title": "More Than Enough",
+    "body": "Maybe life was never asking me to become someone extraordinary. Maybe becoming someone honest, peaceful, and grateful was already enough.",
+    "image": "",
+    "tags": [
+      "gratitude"
+    ]
+  },
+  {
+    "date": "2026-08-10",
+    "title": "Quietly Proud",
+    "body": "I don't need everyone to notice how far I've come. There is a quiet kind of pride in knowing how many difficult days I faced and still choosing to move forward.",
+    "image": "",
+    "tags": [
+      "confidence"
+    ]
+  },
+  {
+    "date": "2026-08-06",
+    "title": "A Reason to Rise",
+    "body": "Some mornings arrive without answers, but they still bring another chance. Perhaps purpose isn't something we find all at once; perhaps we build it through the reasons we choose to rise.",
+    "image": "",
+    "tags": [
+      "purpose"
+    ]
+  },
+  {
+    "date": "2026-07-31",
+    "title": "Tomorrow's Light",
+    "body": "The year has taught me that every ending carries the quiet promise of another sunrise. As long as hope lives within me, tomorrow will always have something worth waking up for.",
+    "image": "",
+    "tags": [
+      "hope"
+    ]
+  },
+  {
+    "date": "2026-07-28",
+    "title": "Small Steps",
+    "body": "I used to underestimate the power of ordinary days. Looking back, it wasn't the giant leaps that changed my life—it was the small steps I chose not to skip.",
+    "image": "",
+    "tags": [
+      "progress"
+    ]
+  },
+  {
+    "date": "2026-07-25",
+    "title": "Beyond the Horizon",
+    "body": "Every horizon I've reached has revealed another waiting in the distance. Maybe success isn't about arriving—it's about never losing the courage to keep walking toward what's next.",
+    "image": "",
+    "tags": [
+      "horizon"
+    ]
+  },
+  {
+    "date": "2026-07-22",
+    "title": "To Be Continued",
+    "body": "Seven months, countless memories, and a heart that's learned a little more each day. This journal isn't the end of the story—it's only the beginning.",
+    "image": "",
+    "tags": [
+      "continue"
+    ]
+  },
+  {
+    "date": "2026-07-20",
+    "title": "Where Peace Lives",
+    "body": "I no longer search for happiness in distant places. The greatest peace I've found has always been in the moments where I simply slowed down and breathed.",
+    "image": "",
+    "tags": [
+      "breathe"
+    ]
+  },
+  {
+    "date": "2026-07-18",
+    "title": "Still Becoming",
+    "body": "I'm not who I was at the start of this year, and that's enough for me. Growth is quiet, but it always leaves beautiful evidence behind.",
+    "image": "",
+    "tags": [
+      "evolve"
+    ]
+  },
+  {
+    "date": "2026-07-15",
+    "title": "Golden Hour",
+    "body": "There is something magical about the last light of the day. It reminds me that endings can glow just as beautifully as beginnings.",
+    "image": "",
+    "tags": [
+      "afterglow"
+    ]
+  },
+  {
+    "date": "2026-07-11",
+    "title": "A Softer Heart",
+    "body": "Life has changed me in countless ways, but I'm grateful it never convinced me to stop being kind. That's a part of me worth protecting.",
+    "image": "",
+    "tags": [
+      "gentle"
+    ]
+  },
+  {
+    "date": "2026-07-08",
+    "title": "The Right Moment",
+    "body": "I've stopped rushing life. Beautiful things have their own timing, and the best chapters usually arrive when we least expect them to.",
+    "image": "",
+    "tags": [
+      "destiny"
+    ]
+  },
+  {
+    "date": "2026-07-05",
+    "title": "Unwritten Days",
+    "body": "Every sunrise hands us another blank page. We don't need perfect plans; we only need enough hope to write something worth remembering.",
+    "image": "",
+    "tags": [
+      "blank"
+    ]
+  },
+  {
+    "date": "2026-07-02",
+    "title": "July Skies",
+    "body": "The sky looked endless today, almost like it was reminding me that dreams don't have limits. Only the courage to chase them ever does.",
+    "image": "",
+    "tags": [
+      "skyline"
+    ]
+  },
+  {
+    "date": "2026-06-30",
+    "title": "Finding Home",
+    "body": "Home isn't always a place waiting on a map. Sometimes it's the calm you finally discover within yourself after wandering through countless seasons of change.",
+    "image": "",
+    "tags": [
+      "haven"
+    ]
+  },
+  {
+    "date": "2026-06-26",
+    "title": "Beyond Tomorrow",
+    "body": "The future doesn't have to be clear for it to be beautiful. Sometimes faith is simply taking the next step without knowing where it ends.",
+    "image": "",
+    "tags": [
+      "beyond"
+    ]
+  },
+  {
+    "date": "2026-06-22",
+    "title": "One Last Chapter",
+    "body": "Every ending teaches us something the beginning never could. Maybe that's why goodbyes often carry the wisdom that love leaves behind.",
+    "image": "",
+    "tags": [
+      "closure"
+    ]
+  },
+  {
+    "date": "2026-06-18",
+    "title": "Lost and Found",
+    "body": "I spent so much time searching for happiness in people that I almost forgot it had been quietly waiting inside me the whole time.",
+    "image": "",
+    "tags": [
+      "within"
+    ]
+  },
+  {
+    "date": "2026-06-14",
+    "title": "Quiet Victories",
+    "body": "Not every achievement deserves applause. Some victories happen in silence, when you finally make peace with a version of yourself you once struggled to accept.",
+    "image": "",
+    "tags": [
+      "resolve"
+    ]
+  },
+  {
+    "date": "2026-06-10",
+    "title": "The Right Person",
+    "body": "Love shouldn't feel like convincing someone to stay. One day, the right person will choose your presence as naturally as the sunrise finds the morning.",
+    "image": "",
+    "tags": [
+      "destined"
+    ]
+  },
+  {
+    "date": "2026-06-06",
+    "title": "A Familiar Rain",
+    "body": "Rain still carries the scent of old memories. I don't run from it anymore. Some storms arrive only to remind us how much we've grown.",
+    "image": "",
+    "tags": [
+      "petrichor"
+    ]
+  },
+  {
+    "date": "2026-06-02",
+    "title": "Midnight Roads",
+    "body": "There's something honest about driving through empty streets at night. The silence never judges, it simply listens while the heart untangles everything it couldn't say aloud.",
+    "image": "",
+    "tags": [
+      "nocturne"
+    ]
+  },
+  {
+    "date": "2026-05-31",
+    "title": "The Next Page",
+    "body": "I've stopped asking life for perfect endings. A meaningful journey is enough, especially when every chapter teaches me how to love and live a little better.",
+    "image": "",
+    "tags": [
+      "forward"
+    ]
+  },
+  {
+    "date": "2026-05-26",
+    "title": "Dream Chaser",
+    "body": "Every dream begins as something impossible until one ordinary day it quietly becomes a memory you never want to stop telling.",
+    "image": "",
+    "tags": [
+      "vision"
+    ]
+  },
+  {
+    "date": "2026-05-22",
+    "title": "Hidden Light",
+    "body": "Even the smallest spark can brighten an endless night. I guess hope has never cared about how dark the world decides to become.",
+    "image": "",
+    "tags": [
+      "ember"
+    ]
+  },
+  {
+    "date": "2026-05-19",
+    "title": "Holding On",
+    "body": "Letting go isn't forgetting someone. It's choosing not to let yesterday decide whether today deserves a smile or another chance.",
+    "image": "",
+    "tags": [
+      "release"
+    ]
+  },
+  {
+    "date": "2026-05-15",
+    "title": "The Long Drive",
+    "body": "Some roads don't lead anywhere special, yet they're exactly where the heart finds the silence it has been searching for all along.",
+    "image": "",
+    "tags": [
+      "highway"
+    ]
+  },
+  {
+    "date": "2026-05-11",
+    "title": "Moon Promises",
+    "body": "The moon has watched every version of me. The one who loved deeply, the one who broke quietly, and the one still learning to shine.",
+    "image": "",
+    "tags": [
+      "lunar"
+    ]
+  },
+  {
+    "date": "2026-05-07",
+    "title": "Still Looking",
+    "body": "Sometimes I catch myself searching every crowd for a face I already know isn't there. Hope has a strange habit of arriving before logic does.",
+    "image": "",
+    "tags": [
+      "wander"
+    ]
+  },
+  {
+    "date": "2026-05-03",
+    "title": "Summer Breeze",
+    "body": "The warm wind carried a familiar feeling today. It reminded me that not every beautiful memory needs to be relived to be appreciated forever.",
+    "image": "",
+    "tags": [
+      "solstice"
+    ]
+  },
+  {
+    "date": "2026-04-30",
+    "title": "Tomorrow Calls",
+    "body": "No matter how uncertain today feels, tomorrow always arrives carrying another chance to become the person I've been trying to grow into.",
+    "image": "",
+    "tags": [
+      "horizonline"
+    ]
+  },
+  {
+    "date": "2026-04-26",
+    "title": "The Right Time",
+    "body": "Maybe life doesn't make us wait to punish us. Maybe it's simply preparing us for something we aren't ready to understand yet.",
+    "image": "",
+    "tags": [
+      "timing"
+    ]
+  },
+  {
+    "date": "2026-04-22",
+    "title": "Quiet Wishes",
+    "body": "I no longer wish for perfect days. I wish for peaceful ones, where my heart feels lighter than the thoughts it carries.",
+    "image": "",
+    "tags": [
+      "tranquil"
+    ]
+  },
+  {
+    "date": "2026-04-18",
+    "title": "Our Last Walk",
+    "body": "I didn't realize that ordinary afternoon would become our final memory together. Sometimes goodbye happens long before anyone says the word.",
+    "image": "",
+    "tags": [
+      "goodbye"
+    ]
+  },
+  {
+    "date": "2026-04-14",
+    "title": "A Gentle Soul",
+    "body": "The strongest hearts never need to prove themselves. They simply choose kindness, even when the world gives them every reason not to.",
+    "image": "",
+    "tags": [
+      "compassion"
+    ]
+  },
+  {
+    "date": "2026-04-10",
+    "title": "Slow Healing",
+    "body": "Healing isn't measured by the days that pass. It's measured by the moments that no longer hurt the way they used to.",
+    "image": "",
+    "tags": [
+      "mending"
+    ]
+  },
+  {
+    "date": "2026-04-06",
+    "title": "If You Knew",
+    "body": "If you knew how often your name crossed my mind, you'd understand why certain places still feel warmer than they should after all this time.",
+    "image": "",
+    "tags": [
+      "unspoken"
+    ]
+  },
+  {
+    "date": "2026-04-02",
+    "title": "Golden Evenings",
+    "body": "Some sunsets don't ask to be remembered. They simply paint the sky with colors that quietly convince the heart to believe in beautiful endings again.",
+    "image": "",
+    "tags": [
+      "golden"
+    ]
+  },
+  {
+    "date": "2026-03-30",
+    "title": "Turning Pages",
+    "body": "The best chapters begin when we stop rereading the old ones. Today feels like the first page of a story I'm finally ready to write.",
+    "image": "",
+    "tags": [
+      "chapter"
+    ]
+  },
+  {
+    "date": "2026-03-26",
+    "title": "Unfinished Dreams",
+    "body": "Some dreams are delayed, not denied. Every setback teaches me something that success could never explain in words.",
+    "image": "",
+    "tags": [
+      "aspire"
+    ]
+  },
+  {
+    "date": "2026-03-22",
+    "title": "Small Miracles",
+    "body": "A stranger's smile, a warm breeze, an unexpected message. Happiness rarely arrives with grand entrances. It quietly hides inside ordinary moments.",
+    "image": "",
+    "tags": [
+      "wonder"
+    ]
+  },
+  {
+    "date": "2026-03-18",
+    "title": "Almost Home",
+    "body": "Life isn't about reaching the finish line. It's about finding peace while you're still on the journey, one imperfect step at a time.",
+    "image": "",
+    "tags": [
+      "journey"
+    ]
+  },
+  {
+    "date": "2026-03-14",
+    "title": "Rain Knows Best",
+    "body": "Rain has a way of washing away the noise. It reminds me that even the darkest clouds eventually run out of tears.",
+    "image": "",
+    "tags": [
+      "rainfall"
+    ]
+  },
+  {
+    "date": "2026-03-10",
+    "title": "Your Favorite Place",
+    "body": "I passed by the place we loved today. Nothing had changed except me. Funny how memories stay exactly where we leave them.",
+    "image": "",
+    "tags": [
+      "corner"
+    ]
+  },
+  {
+    "date": "2026-03-07",
+    "title": "Spring Feelings",
+    "body": "The trees are finding new leaves, and somehow my heart is doing the same. Maybe healing has always looked a little like spring.",
+    "image": "",
+    "tags": [
+      "spring"
+    ]
+  },
+  {
+    "date": "2026-03-03",
+    "title": "A Little Braver",
+    "body": "I'm slowly learning that courage isn't the absence of fear. It's choosing to keep moving, even when the road ahead refuses to promise anything.",
+    "image": "",
+    "tags": [
+      "fearless"
+    ]
+  },
+  {
+    "date": "2026-02-28",
+    "title": "Bloom Again",
+    "body": "Healing doesn't arrive with fireworks. It begins the moment you realize your smile returned before the memories did, and peace quietly followed behind.",
+    "image": "",
+    "tags": [
+      "flourish"
+    ]
+  },
+  {
+    "date": "2026-02-25",
+    "title": "Soft Hearts",
+    "body": "Kindness is a quiet kind of courage. Even after disappointment, choosing to remain gentle is one of the bravest things a heart can ever do.",
+    "image": "",
+    "tags": [
+      "tender"
+    ]
+  },
+  {
+    "date": "2026-02-22",
+    "title": "Without Goodbye",
+    "body": "Some people leave without a final conversation. The silence becomes their farewell, and we're left translating memories into the closure we never received.",
+    "image": "",
+    "tags": [
+      "vanish"
+    ]
+  },
+  {
+    "date": "2026-02-18",
+    "title": "Our Old Song",
+    "body": "A familiar melody found me today. For a few minutes it felt like time had forgotten to move, and every memory returned exactly as it left.",
+    "image": "",
+    "tags": [
+      "chorus"
+    ]
+  },
+  {
+    "date": "2026-02-14",
+    "title": "A Different Love",
+    "body": "Today isn't about waiting for flowers or promises. It's about learning that the strongest love begins when we finally choose ourselves without guilt.",
+    "image": "",
+    "tags": [
+      "selfworth"
+    ]
+  },
+  {
+    "date": "2026-02-10",
+    "title": "Before Midnight",
+    "body": "The quietest hours always ask the loudest questions. I wonder if your thoughts ever wander to the memories we accidentally left unfinished.",
+    "image": "",
+    "tags": [
+      "moonlit"
+    ]
+  },
+  {
+    "date": "2026-02-06",
+    "title": "One More Sunset",
+    "body": "The sky keeps proving that endings can be beautiful. Every sunset reminds me that letting go doesn't always mean losing something worth loving.",
+    "image": "",
+    "tags": [
+      "horizon"
+    ]
+  },
+  {
+    "date": "2026-02-02",
+    "title": "Coffee Memories",
+    "body": "Every cup tastes a little different these days. Maybe it's because your name still finds its way into my thoughts before the first sip is even gone.",
+    "image": "",
+    "tags": [
+      "espresso"
+    ]
+  },
+  {
+    "date": "2026-01-30",
+    "title": "Hope Returns",
+    "body": "No matter how many times life disappoints me, hope always finds another reason to knock. Maybe that's what keeps us moving toward tomorrow.",
+    "image": "",
+    "tags": [
+      "rebloom"
+    ]
+  },
+  {
+    "date": "2026-01-25",
+    "title": "Almost Forever",
+    "body": "Not every love story is meant to last forever. Some arrive only to remind us that our hearts are still capable of feeling everything.",
+    "image": "",
+    "tags": [
+      "fleeting"
+    ]
+  },
+  {
+    "date": "2026-01-21",
+    "title": "Letters Unread",
+    "body": "There are messages we never send because some feelings deserve honesty, even if they're only brave enough to exist on forgotten pages.",
+    "image": "",
+    "tags": [
+      "unsaid"
+    ]
+  },
+  {
+    "date": "2026-01-17",
+    "title": "The Empty Chair",
+    "body": "Some places never feel the same after someone leaves. It's not the chair that's empty. It's the laughter that forgot how to come back.",
+    "image": "",
+    "tags": [
+      "vacancy"
+    ]
+  },
+  {
+    "date": "2026-01-13",
+    "title": "Halfway There",
+    "body": "Growth rarely arrives with applause. Most days it looks like choosing peace over pride and slowly becoming someone yesterday's version would admire.",
+    "image": "",
+    "tags": [
+      "becoming"
+    ]
+  },
+  {
+    "date": "2026-01-09",
+    "title": "Your Smile Stayed",
+    "body": "It's funny how I forgot entire conversations but somehow remembered the exact way you smiled. Maybe happiness leaves fingerprints where words never can.",
+    "image": "",
+    "tags": [
+      "glimmer"
+    ]
+  },
+  {
+    "date": "2026-01-05",
+    "title": "Quiet Mornings",
+    "body": "The world moves slower before sunrise. Those silent moments remind me that peace isn't found in places. It's created inside the heart we choose to protect.",
+    "image": "",
+    "tags": [
+      "stillness"
+    ]
+  },
+  {
+    "date": "2026-01-01",
+    "title": "A New Beginning",
+    "body": "A fresh year always feels like an unopened letter. I don't know what's inside yet, but I'm hoping every page teaches me something worth remembering.",
+    "image": "",
+    "tags": [
+      "genesis"
+    ]
+  },
+  {
+    "date": "2025-12-31",
+    "title": "A New Page",
+    "body": "Tonight, I close this chapter without knowing exactly what comes next. Maybe that's the beauty of a new beginning—the page is empty, and the story is finally mine to write.",
+    "image": "",
+    "tags": [
+      "newbeginning"
+    ]
+  },
+  {
+    "date": "2025-12-27",
+    "title": "Before the New Year",
+    "body": "I don't want to enter another year pretending I have everything figured out. I only want the courage to keep learning, the patience to keep growing, and the heart to keep believing.",
+    "image": "",
+    "tags": [
+      "hope"
+    ]
+  },
+  {
+    "date": "2025-12-22",
+    "title": "One Last Sunset",
+    "body": "The year's final sunsets don't look different from the others, yet somehow they feel more meaningful. Maybe endings become beautiful when we finally stop being afraid of them.",
+    "image": "",
+    "tags": [
+      "sunset"
+    ]
+  },
+  {
+    "date": "2025-12-18",
+    "title": "What I Carry",
+    "body": "I won't carry every disappointment into the next year. I'll take the lessons, the memories, the people who mattered, and leave the rest where it belongs.",
+    "image": "",
+    "tags": [
+      "release"
+    ]
+  },
+  {
+    "date": "2025-12-14",
+    "title": "Dear Past Me",
+    "body": "If I could speak to the person I was at the beginning of this journey, I'd tell him to worry less. Not everything will make sense, but somehow, he will find his way.",
+    "image": "",
+    "tags": [
+      "past"
+    ]
+  },
+  {
+    "date": "2025-12-10",
+    "title": "Some Things End",
+    "body": "I've learned that an ending doesn't always mean failure. Sometimes a chapter has simply said everything it needed to say, and turning the page is an act of courage.",
+    "image": "",
+    "tags": [
+      "ending"
+    ]
+  },
+  {
+    "date": "2025-12-06",
+    "title": "Looking Back",
+    "body": "This year wasn't everything I imagined it would be. But every unexpected turn brought me closer to understanding who I am and what truly matters.",
+    "image": "",
+    "tags": [
+      "reflection"
+    ]
+  },
+  {
+    "date": "2025-12-02",
+    "title": "December Arrives",
+    "body": "The final month always feels different. It carries the weight of everything we've lived through and the quiet excitement of everything still waiting ahead.",
+    "image": "",
+    "tags": [
+      "december"
+    ]
+  },
+  {
+    "date": "2025-11-30",
+    "title": "Before December",
+    "body": "Another month quietly disappears behind me. I have fewer answers than I expected, but more strength than I knew I had—and perhaps that's enough.",
+    "image": "",
+    "tags": [
+      "reflection"
+    ]
+  },
+  {
+    "date": "2025-11-26",
+    "title": "Stronger Than Yesterday",
+    "body": "I don't need to be stronger than everyone else. Being a little stronger than the person I was yesterday is enough reason to keep going.",
+    "image": "",
+    "tags": [
+      "growth"
+    ]
+  },
+  {
+    "date": "2025-11-22",
+    "title": "A Grateful Heart",
+    "body": "I've started noticing how much beauty exists in ordinary days. Maybe gratitude isn't about having more; maybe it's about finally seeing what was already there.",
+    "image": "",
+    "tags": [
+      "thankful"
+    ]
+  },
+  {
+    "date": "2025-11-18",
+    "title": "Lessons I Keep",
+    "body": "Some lessons arrived through mistakes, others through people, and a few through heartbreak. I carry them all—not as regrets, but as pieces of wisdom.",
+    "image": "",
+    "tags": [
+      "wisdom"
+    ]
+  },
+  {
+    "date": "2025-11-14",
+    "title": "Still Standing",
+    "body": "There were moments I thought I wouldn't make it through. Looking back now, I realize surviving those days was itself a quiet kind of victory.",
+    "image": "",
+    "tags": [
+      "strength"
+    ]
+  },
+  {
+    "date": "2025-11-10",
+    "title": "Small Things",
+    "body": "A good conversation, a familiar smile, fresh air after rain—life keeps reminding me that happiness rarely needs to be extraordinary.",
+    "image": "",
+    "tags": [
+      "simple"
+    ]
+  },
+  {
+    "date": "2025-11-06",
+    "title": "What Hard Days Taught",
+    "body": "The difficult days taught me things comfort never could. They showed me how strong I could become when there was no easy way around the storm.",
+    "image": "",
+    "tags": [
+      "resilience"
+    ]
+  },
+  {
+    "date": "2025-11-02",
+    "title": "Thankful Anyway",
+    "body": "Not every chapter was kind to me, but every chapter left something behind. Today I am grateful not only for what stayed, but also for what taught me to let go.",
+    "image": "",
+    "tags": [
+      "gratitude"
+    ]
+  },
+  {
+    "date": "2025-10-31",
+    "title": "The Peace I Found",
+    "body": "I stopped waiting for life to become perfect before allowing myself to feel peaceful. Somehow, accepting the imperfect version of today made tomorrow feel lighter.",
+    "image": "",
+    "tags": [
+      "stillness"
+    ]
+  },
+  {
+    "date": "2025-10-27",
+    "title": "Soft Evenings",
+    "body": "Some evenings don't need plans, conversations, or explanations. A warm cup, a quiet room, and a little gratitude can be enough.",
+    "image": "",
+    "tags": [
+      "evening"
+    ]
+  },
+  {
+    "date": "2025-10-23",
+    "title": "Alone, Not Lost",
+    "body": "Being alone doesn't mean you've lost your way. Sometimes solitude is where you finally hear the voice that gets buried beneath everyone else's expectations.",
+    "image": "",
+    "tags": [
+      "alone"
+    ]
+  },
+  {
+    "date": "2025-10-19",
+    "title": "A Familiar Song",
+    "body": "A song I hadn't heard in years played today. For a moment, an entire chapter returned—not to hurt me, but to remind me how far I've travelled since then.",
+    "image": "",
+    "tags": [
+      "music"
+    ]
+  },
+  {
+    "date": "2025-10-15",
+    "title": "Peace Within",
+    "body": "I spent years looking for peace in places, people, and promises. It took time to realize that peace begins when we stop fighting every thought that visits us.",
+    "image": "",
+    "tags": [
+      "peace"
+    ]
+  },
+  {
+    "date": "2025-10-11",
+    "title": "The Empty Street",
+    "body": "An empty street at night feels like a place where thoughts finally have room to breathe. Sometimes the quietest roads lead to the clearest parts of ourselves.",
+    "image": "",
+    "tags": [
+      "night"
+    ]
+  },
+  {
+    "date": "2025-10-07",
+    "title": "Old Photographs",
+    "body": "Old photographs have a strange way of making yesterday feel close enough to touch. I don't miss every moment, but I'm grateful that they once existed.",
+    "image": "",
+    "tags": [
+      "memories"
+    ]
+  },
+  {
+    "date": "2025-10-03",
+    "title": "Quiet Company",
+    "body": "There are days when being alone doesn't feel lonely at all. Silence becomes a kind of company, reminding me that I can be comfortable in my own presence.",
+    "image": "",
+    "tags": [
+      "solitude"
+    ]
+  },
+  {
+    "date": "2025-09-30",
+    "title": "I Accept",
+    "body": "I don't have all the answers yet, and maybe I don't need them. For tonight, it is enough to trust that life is still unfolding exactly where I am.",
+    "image": "",
+    "tags": [
+      "peace"
+    ]
+  },
+  {
+    "date": "2025-09-26",
+    "title": "What Remains",
+    "body": "People leave, plans change, and places become memories. But somehow, the lessons remain—quiet reminders of everything we've survived and everything we've become.",
+    "image": "",
+    "tags": [
+      "lessons"
+    ]
+  },
+  {
+    "date": "2025-09-22",
+    "title": "Between Seasons",
+    "body": "There are seasons when nothing feels certain, yet everything seems to be quietly moving into place. Perhaps uncertainty is simply life rearranging itself.",
+    "image": "",
+    "tags": [
+      "seasons"
+    ]
+  },
+  {
+    "date": "2025-09-18",
+    "title": "A Different Version",
+    "body": "I looked back at who I was a year ago and barely recognized that person. Maybe change isn't losing yourself; maybe it's finally meeting the person you were becoming.",
+    "image": "",
+    "tags": [
+      "evolve"
+    ]
+  },
+  {
+    "date": "2025-09-14",
+    "title": "Learning to Let Be",
+    "body": "Not everything deserves another explanation, another chance, or another conversation. Some things become lighter the moment we stop trying to control how they end.",
+    "image": "",
+    "tags": [
+      "acceptance"
+    ]
+  },
+  {
+    "date": "2025-09-10",
+    "title": "No Clear Road",
+    "body": "I used to believe every step needed a destination. Now I'm beginning to understand that sometimes walking forward is enough, even when the road refuses to explain itself.",
+    "image": "",
+    "tags": [
+      "uncertainty"
+    ]
+  },
+  {
+    "date": "2025-09-06",
+    "title": "Things Change",
+    "body": "Some things end quietly while others disappear without warning. Maybe growing up is learning to let life change without constantly asking it to stay the same.",
+    "image": "",
+    "tags": [
+      "change"
+    ]
+  },
+  {
+    "date": "2025-09-02",
+    "title": "September Rain",
+    "body": "The rain arrived without asking, just like so many changes in life. I've learned that not everything needs to be understood immediately to be accepted.",
+    "image": "",
+    "tags": [
+      "rain"
+    ]
+  },
+  {
+    "date": "2025-08-30",
+    "title": "Before September",
+    "body": "Another month is ending, and I can feel something changing inside me. I don't know what the next chapter holds, but I'm no longer afraid to open it.",
+    "image": "",
+    "tags": [
+      "chapter"
+    ]
+  },
+  {
+    "date": "2025-08-26",
+    "title": "Growing Quietly",
+    "body": "Nobody sees every battle you fight within yourself. That's okay. Some of the most important growth happens where there are no witnesses.",
+    "image": "",
+    "tags": [
+      "growth"
+    ]
+  },
+  {
+    "date": "2025-08-22",
+    "title": "A New Rhythm",
+    "body": "Life feels different when you stop trying to force every moment into place. Some things need effort, while others simply need time.",
+    "image": "",
+    "tags": [
+      "balance"
+    ]
+  },
+  {
+    "date": "2025-08-18",
+    "title": "What Fear Couldn't Stop",
+    "body": "I carried fear into places I once thought I couldn't enter. Somehow, I kept walking anyway, and that's when I realized fear doesn't always have to disappear before we move.",
+    "image": "",
+    "tags": [
+      "fearless"
+    ]
+  },
+  {
+    "date": "2025-08-14",
+    "title": "No Turning Back",
+    "body": "Some chapters become impossible to return to once you've grown beyond them. Maybe that's not something to regret. Maybe it's proof that life is moving.",
+    "image": "",
+    "tags": [
+      "forward"
+    ]
+  },
+  {
+    "date": "2025-08-10",
+    "title": "The Person Ahead",
+    "body": "There is a version of me somewhere ahead that I haven't met yet. Every difficult decision and every quiet effort feels like another step toward becoming him.",
+    "image": "",
+    "tags": [
+      "becoming"
+    ]
+  },
+  {
+    "date": "2025-08-06",
+    "title": "Changing Slowly",
+    "body": "I used to think change had to be dramatic to matter. Now I notice it in smaller things—the thoughts I no longer carry and the fears I no longer obey.",
+    "image": "",
+    "tags": [
+      "change"
+    ]
+  },
+  {
+    "date": "2025-08-02",
+    "title": "A Little Braver",
+    "body": "Courage doesn't always feel powerful. Sometimes it is simply waking up, facing another uncertain day, and deciding to try again.",
+    "image": "",
+    "tags": [
+      "courage"
+    ]
+  },
+  {
+    "date": "2025-07-31",
+    "title": "Keep Looking",
+    "body": "I may not have found the answer yet, but I'm still looking. And perhaps there is something beautiful about continuing to search without giving up on yourself.",
+    "image": "",
+    "tags": [
+      "hope"
+    ]
+  },
+  {
+    "date": "2025-07-27",
+    "title": "The Dream Within",
+    "body": "Some dreams stay alive even after years of doubt. Maybe the ones that refuse to disappear are the ones worth listening to.",
+    "image": "",
+    "tags": [
+      "vision"
+    ]
+  },
+  {
+    "date": "2025-07-23",
+    "title": "One Step",
+    "body": "I don't need to see the entire path tonight. One step is enough. Tomorrow can reveal the next one when I'm ready to take it.",
+    "image": "",
+    "tags": [
+      "progress"
+    ]
+  },
+  {
+    "date": "2025-07-19",
+    "title": "Still Searching",
+    "body": "I'm still trying to understand what I truly want from life. Perhaps finding yourself isn't one great discovery, but hundreds of small realizations along the way.",
+    "image": "",
+    "tags": [
+      "searching"
+    ]
+  },
+  {
+    "date": "2025-07-15",
+    "title": "Quiet Ambition",
+    "body": "Not every dream needs to be announced. Some dreams grow better in silence, protected by patience until the day they are finally ready to become real.",
+    "image": "",
+    "tags": [
+      "ambition"
+    ]
+  },
+  {
+    "date": "2025-07-11",
+    "title": "A Different Road",
+    "body": "Maybe the road I imagined for myself was never the one I was meant to take. Sometimes getting lost is simply life making room for a different destination.",
+    "image": "",
+    "tags": [
+      "journey"
+    ]
+  },
+  {
+    "date": "2025-07-07",
+    "title": "Restless Nights",
+    "body": "Some nights are filled with thoughts of everything I want to become. Sleep feels distant when the mind is busy imagining a life that hasn't happened yet.",
+    "image": "",
+    "tags": [
+      "dreams"
+    ]
+  },
+  {
+    "date": "2025-07-03",
+    "title": "Somewhere Ahead",
+    "body": "I don't know exactly where I'm going yet, but something inside me keeps saying there is more waiting ahead. Maybe not knowing is part of the journey.",
+    "image": "",
+    "tags": [
+      "direction"
+    ]
+  },
+  {
+    "date": "2025-06-30",
+    "title": "My Own Definition",
+    "body": "Success, happiness, and a good life don't have to look the same for everyone. I'm slowly learning to define them for myself instead of borrowing someone else's idea.",
+    "image": "",
+    "tags": [
+      "selfworth"
+    ]
+  },
+  {
+    "date": "2025-06-26",
+    "title": "Becoming Me",
+    "body": "I am still changing, but I no longer feel the need to rush toward some perfect version of myself. Maybe becoming yourself is simply becoming more honest with who you already are.",
+    "image": "",
+    "tags": [
+      "self"
+    ]
+  },
+  {
+    "date": "2025-06-22",
+    "title": "What Matters",
+    "body": "The older I get, the more I realize that having everything isn't the same as having what matters. A meaningful life is built from the things we choose to value.",
+    "image": "",
+    "tags": [
+      "meaning"
+    ]
+  },
+  {
+    "date": "2025-06-18",
+    "title": "Without Pretending",
+    "body": "There is a certain freedom in no longer trying to look like someone you're not. The moment you stop performing for approval, you finally have room to be real.",
+    "image": "",
+    "tags": [
+      "authentic"
+    ]
+  },
+  {
+    "date": "2025-06-14",
+    "title": "The Lines I Draw",
+    "body": "I used to think saying no meant disappointing people. Now I understand that boundaries aren't walls; they're reminders of what I am willing to protect.",
+    "image": "",
+    "tags": [
+      "boundaries"
+    ]
+  },
+  {
+    "date": "2025-06-10",
+    "title": "No Explanation",
+    "body": "Not every choice needs to be explained to everyone. Sometimes choosing what feels right for you is enough, even when others don't understand it.",
+    "image": "",
+    "tags": [
+      "choices"
+    ]
+  },
+  {
+    "date": "2025-06-06",
+    "title": "Things I Believe",
+    "body": "People may change their opinions about me, and circumstances may change around me. But knowing what I believe in gives me something steady to return to.",
+    "image": "",
+    "tags": [
+      "values"
+    ]
+  },
+  {
+    "date": "2025-06-02",
+    "title": "My Own Voice",
+    "body": "For a long time, I wondered what everyone else expected from me. Somewhere along the way, I realized that finding myself meant finally listening to my own voice.",
+    "image": "",
+    "tags": [
+      "identity"
+    ]
+  }
+];

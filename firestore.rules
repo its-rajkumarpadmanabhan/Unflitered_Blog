@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isOwner() {
+      return request.auth != null && (
+        request.auth.token.email.lower() == "collabwithrajkumar@gmail.com" ||
+        request.auth.token.email.lower() == "rrajkumarpadmanabhan@gmail.com"
+      );
+    }
+
+    match /posts/{postId} {
+      // 1. Anyone (public visitors & APK users) can read your journal
+      allow read: if true;
+      
+      // 2. ONLY authorized blog owners can create or delete posts
+      allow create, delete: if isOwner();
+      
+      // 3. ONLY authorized blog owners can edit post titles, bodies, and tags.
+      //    Public visitors can only increment likesCount and sharesCount!
+      allow update: if isOwner()
+        || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likesCount'])
+        || request.resource.data.diff(resource.data).affectedKeys().hasOnly(['sharesCount'])
+        || request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likesCount', 'sharesCount']));
+    }
+
+    match /subscribers/{subId} {
+      allow create, update: if true;
+      allow read: if isOwner();
+    }
+  }
+}
