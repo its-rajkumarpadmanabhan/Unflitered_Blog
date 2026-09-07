@@ -1,4 +1,5 @@
-<img width="1899" height="939" alt="image" src="https://github.com/user-attachments/assets/360ad3e6-4822-4fb3-84b6-7e432c9530f5" />
+<img width="1908" height="935" alt="image" src="https://github.com/user-attachments/assets/ac4a129d-fd2a-4bdc-b2c0-5de73f51e736" />
+
 
 # Migration Plan: Firebase Firestore, Admin Panel & Capacitor APK
 
