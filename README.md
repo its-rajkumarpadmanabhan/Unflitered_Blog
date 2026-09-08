@@ -1,7 +1,7 @@
 <img width="1908" height="935" alt="image" src="https://github.com/user-attachments/assets/ac4a129d-fd2a-4bdc-b2c0-5de73f51e736" />
 
 
-# Migration Plan: Firebase Firestore, Admin Panel & Capacitor APK
+# Unfilters Blog APK
 
 Migrate the static, month-file-based blog into a dynamic, real-time Firestore-backed application with Firebase Authentication, an Admin Drawer for post creation & deletion, real Firestore likes, and a Capacitor Android app container.
 
