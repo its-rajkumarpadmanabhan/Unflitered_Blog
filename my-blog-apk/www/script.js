@@ -224,7 +224,6 @@ function setupSettingsModal() {
   const closeBtn = document.getElementById('btn-close-settings');
   const notifyToggle = document.getElementById('settings-notify-toggle');
   const notifyBadge = document.getElementById('settings-notify-badge');
-  const adminToggle = document.getElementById('settings-admin-toggle');
 
   if (!settingsModal) return;
 
@@ -305,17 +304,6 @@ function setupSettingsModal() {
           if (updateBadge) updateBadge.textContent = 'Latest ✓';
         }, 3500);
       }, 700);
-    });
-  }
-
-  if (adminToggle) {
-    adminToggle.addEventListener('click', () => {
-      closeSettings();
-      const adminDrawer = document.getElementById('admin-drawer');
-      if (adminDrawer) {
-        adminDrawer.style.display = 'block';
-        triggerHaptic('LIGHT');
-      }
     });
   }
 }
