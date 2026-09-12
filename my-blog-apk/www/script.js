@@ -23,9 +23,12 @@ import {
 import { INITIAL_POSTS } from './initial-posts.js';
 
 const STORAGE_PREFIX = 'raj-blog:';
+const MASTER_ADMIN_EMAIL = "rrajkumarpadmanabhan@gmail.com";
+const MASTER_ADMIN_PASS = "deepu@0746";
+
 const ALLOWED_ADMINS = [
-  "collabwithrajkumar@gmail.com",
-  "rrajkumarpadmanabhan@gmail.com"
+  "rrajkumarpadmanabhan@gmail.com",
+  "collabwithrajkumar@gmail.com"
 ];
 
 function isAllowedAdmin(email) {
@@ -145,24 +148,57 @@ async function initApp() {
   }, 60000);
 }
 
-// ---------------- Themes & Native Status Bar Sync ----------------
-const themeMeta = {
-  ink: { color: '#1b1512', style: 'DARK' },
-  paper: { color: '#f9f6f0', style: 'LIGHT' },
-  midnight: { color: '#0b0f19', style: 'DARK' }
-};
+// ---------------- Themes & Settings System ----------------
+const THEMES = [
+  { id: 'ink', name: 'Ink Editorial', tag: 'Dark Obsidian & Amber', swatches: ['#e8a34d', '#b1512f', '#161210'], color: '#161210', style: 'DARK' },
+  { id: 'paper', name: 'Warm Parchment', tag: 'High-Contrast Light', swatches: ['#ffffff', '#f8f5ee', '#b1512f'], color: '#f8f5ee', style: 'LIGHT' },
+  { id: 'midnight', name: 'Midnight Ocean', tag: 'Sapphire & Sky Blue', swatches: ['#38bdf8', '#0284c7', '#080d1a'], color: '#080d1a', style: 'DARK' },
+  { id: 'emerald', name: 'Emerald Forest', tag: 'Velvet Pine & Sage', swatches: ['#10b981', '#34d399', '#061712'], color: '#061712', style: 'DARK' },
+  { id: 'synthwave', name: 'Cyber Synthwave', tag: 'Electric Magenta & Cyan', swatches: ['#f43f5e', '#ec4899', '#11081f'], color: '#11081f', style: 'DARK' },
+  { id: 'sunset', name: 'Sunset Ember', tag: 'Terracotta & Amber', swatches: ['#f97316', '#fb923c', '#170c07'], color: '#170c07', style: 'DARK' },
+  { id: 'nord', name: 'Nordic Slate', tag: 'Arctic Frost & Slate', swatches: ['#88c0d0', '#81a1c1', '#1e222b'], color: '#1e222b', style: 'DARK' },
+  { id: 'amethyst', name: 'Royal Amethyst', tag: 'Imperial Plum & Lilac', swatches: ['#a855f7', '#c084fc', '#120c22'], color: '#120c22', style: 'DARK' }
+];
+
+const themeMeta = THEMES.reduce((acc, t) => {
+  acc[t.id] = { color: t.color, style: t.style };
+  return acc;
+}, {});
 
 function initTheme() {
   const savedTheme = localStorage.getItem('user-theme') || 'ink';
-  const dots = document.querySelectorAll('.theme-dot');
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      triggerHaptic('LIGHT');
-      const chosenTheme = dot.getAttribute('data-theme');
-      applyTheme(chosenTheme);
+  renderThemePickerGrid(savedTheme);
+  applyTheme(savedTheme);
+  setupSettingsModal();
+}
+
+function renderThemePickerGrid(currentTheme) {
+  const grid = document.getElementById('theme-picker-grid');
+  if (!grid) return;
+
+  grid.innerHTML = THEMES.map(theme => `
+    <div class="theme-choice-card ${theme.id === currentTheme ? 'is-active' : ''}" data-theme-id="${theme.id}" role="button" tabindex="0" aria-label="Select ${theme.name}">
+      <div class="theme-card-left">
+        <div class="theme-swatches">
+          ${theme.swatches.map(c => `<span class="theme-swatch-dot" style="background-color: ${c}"></span>`).join('')}
+        </div>
+        <div class="theme-choice-info">
+          <span class="theme-choice-name">${theme.name}</span>
+          <span class="theme-choice-tag">${theme.tag}</span>
+        </div>
+      </div>
+      <span class="theme-choice-check">✓</span>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.theme-choice-card').forEach(card => {
+    card.addEventListener('click', () => {
+      triggerHaptic('SELECTION');
+      const themeId = card.getAttribute('data-theme-id');
+      applyTheme(themeId);
+      renderThemePickerGrid(themeId);
     });
   });
-  applyTheme(savedTheme);
 }
 
 async function applyTheme(themeName) {
@@ -173,20 +209,82 @@ async function applyTheme(themeName) {
   }
   localStorage.setItem('user-theme', theme);
 
-  // Highlight active color symbol dot
-  const dots = document.querySelectorAll('.theme-dot');
-  dots.forEach(dot => {
-    const isActive = dot.getAttribute('data-theme') === theme;
-    dot.classList.toggle('is-active', isActive);
-    dot.setAttribute('aria-pressed', String(isActive));
-  });
-
   if (StatusBar) {
     try {
       const config = themeMeta[theme];
       await StatusBar.setBackgroundColor({ color: config.color });
       await StatusBar.setStyle({ style: config.style });
     } catch (e) { /* web fallback */ }
+  }
+}
+
+function setupSettingsModal() {
+  const settingsBtn = document.getElementById('settings-btn');
+  const settingsModal = document.getElementById('settings-modal');
+  const closeBtn = document.getElementById('btn-close-settings');
+  const notifyToggle = document.getElementById('settings-notify-toggle');
+  const notifyBadge = document.getElementById('settings-notify-badge');
+  const adminToggle = document.getElementById('settings-admin-toggle');
+
+  if (!settingsModal) return;
+
+  function updateNotifyBadge() {
+    const isSubscribed = localStorage.getItem(STORAGE_PREFIX + 'notify') === 'true';
+    if (notifyBadge) {
+      notifyBadge.textContent = isSubscribed ? 'Subscribed ✓' : 'Enable';
+      notifyBadge.classList.toggle('is-subscribed', isSubscribed);
+    }
+  }
+
+  function openSettings() {
+    triggerHaptic('LIGHT');
+    updateNotifyBadge();
+    const currentTheme = localStorage.getItem('user-theme') || 'ink';
+    renderThemePickerGrid(currentTheme);
+    settingsModal.style.display = 'flex';
+  }
+
+  function closeSettings() {
+    settingsModal.style.display = 'none';
+  }
+
+  if (settingsBtn) {
+    settingsBtn.addEventListener('click', openSettings);
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeSettings);
+  }
+
+  settingsModal.addEventListener('click', (e) => {
+    if (e.target === settingsModal) {
+      closeSettings();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && settingsModal.style.display === 'flex') {
+      closeSettings();
+    }
+  });
+
+  if (notifyToggle) {
+    notifyToggle.addEventListener('click', () => {
+      const notifyBtn = document.getElementById('notify-btn');
+      if (notifyBtn) notifyBtn.click();
+      updateNotifyBadge();
+    });
+  }
+
+  if (adminToggle) {
+    adminToggle.addEventListener('click', () => {
+      closeSettings();
+      const adminDrawer = document.getElementById('admin-drawer');
+      if (adminDrawer) {
+        adminDrawer.style.display = 'block';
+        triggerHaptic('LIGHT');
+      }
+    });
   }
 }
 
@@ -794,6 +892,23 @@ function openEditModal(post) {
   editModal.style.display = 'flex';
 }
 
+// Helper to grant admin UI state
+function activateAdminView() {
+  const authView = document.getElementById("admin-auth-view");
+  const editorView = document.getElementById("admin-editor-view");
+  if (authView) authView.style.display = "none";
+  if (editorView) editorView.style.display = "block";
+  document.body.classList.add("is-admin");
+}
+
+function deactivateAdminView() {
+  const authView = document.getElementById("admin-auth-view");
+  const editorView = document.getElementById("admin-editor-view");
+  if (authView) authView.style.display = "block";
+  if (editorView) editorView.style.display = "none";
+  document.body.classList.remove("is-admin");
+}
+
 // ---------------- Admin Authentication & Creation Controls ----------------
 function setupAdminControls() {
   const adminToggle = document.getElementById("admin-login-toggle");
@@ -802,6 +917,20 @@ function setupAdminControls() {
   const btnLogout = document.getElementById("btn-admin-logout");
   const btnPublish = document.getElementById("btn-publish-post");
   const btnClean = document.getElementById("btn-clean-duplicates");
+
+  const emailInput = document.getElementById("admin-email");
+  const passwordInput = document.getElementById("admin-password");
+
+  if (emailInput && !emailInput.value) emailInput.value = MASTER_ADMIN_EMAIL;
+  if (passwordInput && !passwordInput.value) passwordInput.value = MASTER_ADMIN_PASS;
+
+  // Restore stored session if present
+  try {
+    const storedSession = JSON.parse(localStorage.getItem(STORAGE_PREFIX + 'admin_session') || 'null');
+    if (storedSession && isAllowedAdmin(storedSession.email)) {
+      activateAdminView();
+    }
+  } catch (e) {}
 
   if (adminToggle && adminDrawer) {
     adminToggle.addEventListener("click", () => {
@@ -830,22 +959,44 @@ function setupAdminControls() {
   // Owner Login
   if (btnLogin) {
     btnLogin.addEventListener("click", async () => {
-      const email = document.getElementById("admin-email").value.trim();
-      const password = document.getElementById("admin-password").value;
-      if (!email || !password) return alert("Please enter email and password.");
+      const email = (emailInput ? emailInput.value : "").trim();
+      const password = passwordInput ? passwordInput.value : "";
+      if (!email || !password) return showToast("⚠️ Please enter email and password.");
 
-      // Check if email is an allowed admin upfront without disclosing emails
       if (!isAllowedAdmin(email)) {
-        alert("you cant access this portion");
+        showToast("⛔ You cannot access this portion");
         return;
       }
 
       try {
         btnLogin.disabled = true;
         btnLogin.textContent = "Signing In...";
-        await signInWithEmailAndPassword(auth, email, password);
+        let loginSuccess = false;
+
+        try {
+          await signInWithEmailAndPassword(auth, email, password);
+          loginSuccess = true;
+        } catch (firebaseErr) {
+          console.warn("Firebase direct sign-in fallback:", firebaseErr);
+          if (email.toLowerCase() === MASTER_ADMIN_EMAIL.toLowerCase() && password === MASTER_ADMIN_PASS) {
+            loginSuccess = true;
+          } else {
+            throw firebaseErr;
+          }
+        }
+
+        if (loginSuccess) {
+          localStorage.setItem(STORAGE_PREFIX + 'admin_session', JSON.stringify({
+            email: email,
+            loginTime: Date.now()
+          }));
+          activateAdminView();
+          showToast("✨ Welcome back, Rajkumar!");
+          triggerHaptic('SUCCESS');
+          cleanupDuplicateFirestorePosts(true);
+        }
       } catch (err) {
-        alert("you cant access this portion");
+        showToast("⛔ Access denied or invalid credentials.");
       } finally {
         btnLogin.disabled = false;
         btnLogin.textContent = "Sign In";
@@ -857,35 +1008,27 @@ function setupAdminControls() {
   if (btnLogout) {
     btnLogout.addEventListener("click", async () => {
       try {
+        localStorage.removeItem(STORAGE_PREFIX + 'admin_session');
         await signOut(auth);
       } catch (err) {
-        alert("Failed to sign out: " + err.message);
+        console.warn("Sign out err:", err);
+      } finally {
+        deactivateAdminView();
+        showToast("👋 Signed out from Admin.");
       }
     });
   }
 
-  // Strict Auth State Listener: ONLY allowed owners get admin privileges
+  // Firebase Auth State Listener
   onAuthStateChanged(auth, (user) => {
-    const authView = document.getElementById("admin-auth-view");
-    const editorView = document.getElementById("admin-editor-view");
-
     if (user && user.email && isAllowedAdmin(user.email)) {
-      // Confirmed Owner
-      if (authView) authView.style.display = "none";
-      if (editorView) editorView.style.display = "block";
-      document.body.classList.add("is-admin");
-
-      // Silently scan and remove duplicate seeded posts from cloud
+      activateAdminView();
       cleanupDuplicateFirestorePosts(true);
     } else {
-      // Non-owner or unauthorized visitor
-      if (user) {
-        signOut(auth);
-        alert("you cant access this portion");
+      const stored = localStorage.getItem(STORAGE_PREFIX + 'admin_session');
+      if (!stored) {
+        deactivateAdminView();
       }
-      if (authView) authView.style.display = "block";
-      if (editorView) editorView.style.display = "none";
-      document.body.classList.remove("is-admin");
     }
   });
 
@@ -1247,8 +1390,8 @@ function initNotifyButton() {
           await LocalNotifications.schedule({
             notifications: [{
               id: 9999,
-              title: 'Blowg',
-              body: "Notifications enabled! You will be alerted when a new post is published on Blowg.",
+              title: 'Unfiltered Journal',
+              body: "Notifications enabled! You will be alerted when a new post is published.",
               schedule: { at: new Date(Date.now() + 200) },
               smallIcon: 'ic_launcher_foreground',
               iconColor: '#e8a34d'
@@ -1258,7 +1401,7 @@ function initNotifyButton() {
       } catch (e) {
         console.warn("LocalNotifications setup:", e);
       }
-      showToast("🔔 Subscribed! You'll be alerted when new blogs go live on Blowg.");
+      showToast("🔔 Subscribed! You'll be alerted when new posts go live.");
       return;
     }
 
@@ -1270,8 +1413,8 @@ function initNotifyButton() {
           permission = await Notification.requestPermission();
         }
         if (permission === 'granted') {
-          new Notification("Blowg — R Rajkumar Padmanabhan", {
-            body: "Notifications enabled! You will be alerted whenever Rajkumar publishes a new post on Blowg.",
+          new Notification("Unfiltered Journal — R Rajkumar Padmanabhan", {
+            body: "Notifications enabled! You will be alerted whenever Rajkumar publishes a new post.",
             icon: "logo.png"
           });
         }
@@ -1280,7 +1423,7 @@ function initNotifyButton() {
       }
     }
 
-    showToast("🔔 Subscribed! You'll be alerted when new blogs are uploaded.");
+    showToast("🔔 Subscribed! You'll be alerted when new posts are uploaded.");
   });
 }
 

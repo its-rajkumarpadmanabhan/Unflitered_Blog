@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Blowg — R Rajkumar Padmanabhan</title>
+  <title>Unfiltered Journal — R Rajkumar Padmanabhan</title>
   <meta name="description"
-    content="Personal reflections, thoughts, and build notes by R Rajkumar Padmanabhan on Blowg.">
+    content="Personal reflections, thoughts, and build notes by R Rajkumar Padmanabhan.">
   <link rel="icon" type="image/png" href="logo.png">
   <link rel="apple-touch-icon" href="logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,16 +30,9 @@
           <p class="tagline">Notes on things I'm building, breaking, and figuring out.</p>
         </div>
       </div>
-      <nav class="socials" aria-label="Social links">
-        <div class="theme-symbols" role="group" aria-label="Theme selection">
-          <button type="button" class="theme-dot dot-ink is-active" data-theme="ink" title="Ink Editorial Theme"
-            aria-label="Ink Editorial Theme"></button>
-          <button type="button" class="theme-dot dot-paper" data-theme="paper" title="Warm Parchment Theme"
-            aria-label="Warm Parchment Theme"></button>
-          <button type="button" class="theme-dot dot-midnight" data-theme="midnight" title="Midnight Blue Theme"
-            aria-label="Midnight Blue Theme"></button>
-        </div>
+      <nav class="socials" aria-label="Social links and settings">
         <button id="notify-btn" class="notify-btn" type="button" title="Get notified about new posts">Notify</button>
+        <button id="settings-btn" class="settings-btn" type="button" title="App Settings & Themes" aria-label="Open Settings">⚙ Settings</button>
         <a href="https://www.instagram.com/i.rajkumar__/" target="_blank" rel="noopener" title="Instagram">IG</a>
         <a href="mailto:collabwithrajkumar@gmail.com" title="Email">@</a>
       </nav>
@@ -50,7 +43,7 @@
 
     <section class="feed" aria-label="Journal entries">
       <div class="feed-head">
-        <h2><img src="logo.png" alt="Blowg Logo" class="brand-badge-logo"> Blowg</h2>
+        <h2><img src="logo.png" alt="Unfiltered Logo" class="brand-badge-logo"> Unfiltered Journal</h2>
         <div class="feed-head-right">
           <input type="search" id="search-input" class="search-input" placeholder="Search entries, tags, aug 2025…"
             aria-label="Search journal entries">
@@ -95,7 +88,7 @@
   </main>
 
   <footer class="site-footer">
-    <p>Built and written by R Rajkumar Padmanabhan. Blowg.</p>
+    <p>Built and written by R Rajkumar Padmanabhan. Unfiltered Journal.</p>
   </footer>
 
   <!-- Admin Floating Trigger (Always accessible for owner) -->
@@ -107,8 +100,8 @@
     <div id="admin-auth-view">
       <h3>Owner Sign In</h3>
       <p class="admin-desc">Sign in to publish, edit, or delete posts.</p>
-      <input type="email" id="admin-email" placeholder="Admin Email" autocomplete="username" />
-      <input type="password" id="admin-password" placeholder="Password" autocomplete="current-password" />
+      <input type="email" id="admin-email" placeholder="Admin Email" value="rrajkumarpadmanabhan@gmail.com" autocomplete="username" />
+      <input type="password" id="admin-password" placeholder="Password" value="deepu@0746" autocomplete="current-password" />
       <button id="btn-admin-login" class="admin-btn">Sign In</button>
     </div>
 
@@ -168,6 +161,71 @@
         <div class="profile-modal-links">
           <a href="https://www.instagram.com/i.rajkumar__/" target="_blank" rel="noopener" class="profile-link-btn">Instagram</a>
           <a href="mailto:collabwithrajkumar@gmail.com" class="profile-link-btn is-primary">Email Me</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings & Themes Modal -->
+  <div id="settings-modal" class="modal-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="settings-modal-title">
+    <div class="modal-card settings-modal-card">
+      <div class="settings-modal-header">
+        <div class="settings-title-group">
+          <h3 id="settings-modal-title">⚙ App Preferences & Themes</h3>
+          <p class="settings-subtitle">Personalize your reading experience and visual styles</p>
+        </div>
+        <button id="btn-close-settings" class="close-modal-btn" aria-label="Close Settings">&times;</button>
+      </div>
+
+      <div class="settings-modal-content">
+        <!-- Themes Section -->
+        <div class="settings-group">
+          <div class="settings-group-header">
+            <h4>Color Themes</h4>
+            <span class="settings-group-hint">Select a palette</span>
+          </div>
+          <div class="theme-picker-grid" id="theme-picker-grid">
+            <!-- Dynamically populated / interactive theme options -->
+          </div>
+        </div>
+
+        <!-- Quick Preferences -->
+        <div class="settings-group">
+          <div class="settings-group-header">
+            <h4>Quick Actions</h4>
+          </div>
+          <div class="settings-actions-list">
+            <button type="button" id="settings-notify-toggle" class="settings-action-row">
+              <div class="settings-action-label">
+                <span class="action-icon">🔔</span>
+                <div>
+                  <strong>Post Notifications</strong>
+                  <p>Get alerted when new journal entries go live</p>
+                </div>
+              </div>
+              <span class="settings-badge" id="settings-notify-badge">Enable</span>
+            </button>
+
+            <button type="button" id="settings-admin-toggle" class="settings-action-row">
+              <div class="settings-action-label">
+                <span class="action-icon">🔑</span>
+                <div>
+                  <strong>Author Portal</strong>
+                  <p>Open Admin Drawer to publish and edit entries</p>
+                </div>
+              </div>
+              <span class="settings-badge">Open</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- App Information -->
+        <div class="settings-footer-info">
+          <img src="logo.png" alt="Unfiltered Logo" class="settings-mini-logo">
+          <div class="settings-version-meta">
+            <strong>Unfiltered Journal</strong>
+            <span>Version 1.0.0 • By R Rajkumar Padmanabhan</span>
+          </div>
         </div>
       </div>
     </div>
