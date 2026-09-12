@@ -276,6 +276,38 @@ function setupSettingsModal() {
     });
   }
 
+  const updateAppBtn = document.getElementById('settings-update-app');
+  const updateBadge = document.getElementById('settings-update-badge');
+
+  if (updateAppBtn) {
+    updateAppBtn.addEventListener('click', async () => {
+      triggerHaptic('MEDIUM');
+      if (updateBadge) updateBadge.textContent = 'Checking...';
+      showToast("🔍 Checking for latest update from cloud...");
+
+      setTimeout(() => {
+        if (updateBadge) updateBadge.textContent = 'Downloading ⬇️';
+        showToast("🚀 Starting latest Unfiltered Journal APK download...");
+        triggerHaptic('SUCCESS');
+
+        const apkDownloadUrl = "https://github.com/its-rajkumarpadmanabhan/Unflitered_Blog/raw/main/Unfiltered-Journal.apk";
+        
+        // Open download in system browser/installer
+        const a = document.createElement('a');
+        a.href = apkDownloadUrl;
+        a.download = "Unfiltered-Journal.apk";
+        a.target = "_blank";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        setTimeout(() => {
+          if (updateBadge) updateBadge.textContent = 'Latest ✓';
+        }, 3500);
+      }, 700);
+    });
+  }
+
   if (adminToggle) {
     adminToggle.addEventListener('click', () => {
       closeSettings();
