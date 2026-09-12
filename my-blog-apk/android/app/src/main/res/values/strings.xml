@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Unfiltered Journal</string>
-    <string name="title_activity_main">Unfiltered Journal</string>
+    <string name="app_name">Blowg</string>
+    <string name="title_activity_main">Blowg</string>
     <string name="package_name">com.unfilteredjournal.blog</string>
     <string name="custom_url_scheme">com.unfilteredjournal.blog</string>
 </resources>

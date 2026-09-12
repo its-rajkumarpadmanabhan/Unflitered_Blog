@@ -1,7 +1,7 @@
 {
-  "name": "unfiltered-blog",
+  "name": "blowg",
   "version": "1.0.0",
-  "description": "Unfiltered Journal by R Rajkumar Padmanabhan",
+  "description": "Blowg Journal by R Rajkumar Padmanabhan",
   "scripts": {
     "start": "npx serve . -l 3000",
     "open:android": "cd my-blog-apk && npx cap open android"

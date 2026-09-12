@@ -1247,8 +1247,8 @@ function initNotifyButton() {
           await LocalNotifications.schedule({
             notifications: [{
               id: 9999,
-              title: 'Unfiltered Journal',
-              body: "Notifications enabled! You will be alerted when a new post is published.",
+              title: 'Blowg',
+              body: "Notifications enabled! You will be alerted when a new post is published on Blowg.",
               schedule: { at: new Date(Date.now() + 200) },
               smallIcon: 'ic_launcher_foreground',
               iconColor: '#e8a34d'
@@ -1258,7 +1258,7 @@ function initNotifyButton() {
       } catch (e) {
         console.warn("LocalNotifications setup:", e);
       }
-      showToast("🔔 Subscribed! You'll be alerted when new blogs go live.");
+      showToast("🔔 Subscribed! You'll be alerted when new blogs go live on Blowg.");
       return;
     }
 
@@ -1270,9 +1270,9 @@ function initNotifyButton() {
           permission = await Notification.requestPermission();
         }
         if (permission === 'granted') {
-          new Notification("R Rajkumar Padmanabhan — Unfiltered Journal", {
-            body: "Notifications enabled! You will be alerted whenever Rajkumar publishes a new unfiltered post.",
-            icon: "profile.png"
+          new Notification("Blowg — R Rajkumar Padmanabhan", {
+            body: "Notifications enabled! You will be alerted whenever Rajkumar publishes a new post on Blowg.",
+            icon: "logo.png"
           });
         }
       } catch (e) {
