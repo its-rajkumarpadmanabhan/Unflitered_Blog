@@ -1,5 +1,77 @@
 export const INITIAL_POSTS = [
   {
+    "date": "2026-09-20",
+    "title": "Before the New Week",
+    "body": "Tonight feels like a small pause between what has been and what comes next. I don't need to predict the week ahead; I only want to enter it with an open mind.",
+    "image": "",
+    "tags": [
+      "renewal"
+    ]
+  },
+  {
+    "date": "2026-09-19",
+    "title": "The Door I Didn't Notice",
+    "body": "Not every opportunity arrives with a clear sign. Sometimes a new direction looks like a small possibility we almost ignored, waiting quietly for us to notice it.",
+    "image": "",
+    "tags": [
+      "opportunity"
+    ]
+  },
+  {
+    "date": "2026-09-18",
+    "title": "A Moment of Gratitude",
+    "body": "Today I paused and thought about how many things once felt impossible that are now simply part of my life. Sometimes progress is easier to see when we look backward.",
+    "image": "",
+    "tags": [
+      "gratitude"
+    ]
+  },
+  {
+    "date": "2026-09-17",
+    "title": "What Feels Real",
+    "body": "The older I become, the less interested I am in things that only look good from the outside. I want moments, people, and choices that feel real when nobody is watching.",
+    "image": "",
+    "tags": [
+      "authenticity"
+    ]
+  },
+  {
+    "date": "2026-09-16",
+    "title": "The Unplanned Moment",
+    "body": "Some of the moments I remember most were never part of the plan. Maybe life becomes interesting when we leave a little space for the unexpected.",
+    "image": "",
+    "tags": [
+      "unexpected"
+    ]
+  },
+  {
+    "date": "2026-09-15",
+    "title": "Between Yesterday and Tomorrow",
+    "body": "Yesterday has already become a memory, while tomorrow is still only a possibility. Somewhere between them is today, quietly asking to be lived.",
+    "image": "",
+    "tags": [
+      "today"
+    ]
+  },
+  {
+    "date": "2026-09-14",
+    "title": "A Different Kind of Strength",
+    "body": "Strength isn't always about pushing harder. Sometimes it means knowing when to pause, protect your peace, and choose what truly deserves your energy.",
+    "image": "",
+    "tags": [
+      "strength"
+    ]
+  },
+  {
+    "date": "2026-09-13",
+    "title": "The Things Worth Keeping",
+    "body": "Some moments disappear as quickly as they arrive, while others quietly stay with us for years. I'm learning to recognize the memories worth carrying forward.",
+    "image": "",
+    "tags": [
+      "memories"
+    ]
+  },
+  {
     "date": "2026-09-07",
     "title": "Here, Today",
     "body": "There is always another goal waiting, another place to reach, another version of myself to become. But today, I want to appreciate the person standing here before rushing toward who I might be tomorrow.",

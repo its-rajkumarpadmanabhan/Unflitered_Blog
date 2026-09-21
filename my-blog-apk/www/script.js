@@ -106,8 +106,126 @@ function updateSavedCountBadge() {
   if (countEl) countEl.textContent = count;
 }
 
+// ---------------- Multi-Language (Quotes & Notifications) System ----------------
+const LANGUAGES = [
+  { id: 'en', name: 'English', native: 'English', code: 'EN', default: true },
+  { id: 'ml', name: 'Malayalam', native: 'മലയാളം', code: 'ML' },
+  { id: 'ta', name: 'Tamil', native: 'தமிழ்', code: 'TA' }
+];
+
+const TRANSLATIONS = {
+  en: {
+    code: 'en',
+    name: 'English',
+    quoteHtml: '"Don\'t judge<code> each day </code> by the harvest you reap but by the seeds <code>that you plant.</code>" — Robert Louis Stevenson',
+    toastLangChanged: 'Language set to English ✨',
+    toastNotifyMuted: '🔕 Notifications muted.',
+    toastNotifySubscribed: "🔔 Subscribed! You'll be alerted when new posts go live.",
+    notifWelcomeTitle: 'Unfiltered Journal',
+    notifWelcomeBody: 'Notifications enabled! You will be alerted when a new post is published.',
+    toastNewPost: '📝 New Post: "{title}"',
+    notifNewPostTitle: 'New Post: {title}',
+    notifNewPostBody: 'A new unfiltered journal entry is live.'
+  },
+  ml: {
+    code: 'ml',
+    name: 'Malayalam',
+    native: 'മലയാളം',
+    quoteHtml: '"ഓരോ ദിവസത്തെയും നിങ്ങൾ കൊയ്യുന്ന വിളവുകൊണ്ടല്ല, മറിച്ച് <code>നിങ്ങൾ പാകുന്ന വിത്തുകൾ കൊണ്ടാണ്</code> വിലയിരുത്തേണ്ടത്." — <code>റോബർട്ട് ലൂയിസ് സ്റ്റീവൻസൺ</code>',
+    toastLangChanged: 'ഭാഷ മലയാളത്തിലേക്ക് മാറ്റി ✨',
+    toastNotifyMuted: '🔕 അറിയിപ്പുകൾ ഓഫാക്കി.',
+    toastNotifySubscribed: '🔔 സബ്‌സ്‌ക്രൈബ് ചെയ്തു! പുതിയ പോസ്റ്റുകൾ വരുമ്പോൾ അറിയിപ്പ് ലഭിക്കും.',
+    notifWelcomeTitle: 'അൺഫിൽറ്റേർഡ് ജേണൽ',
+    notifWelcomeBody: 'അറിയിപ്പുകൾ സജീവമാക്കി! പുതിയ കുറിപ്പുകൾ പ്രസിദ്ധീകരിക്കുമ്പോൾ നിങ്ങൾക്ക് അറിയിപ്പ് ലഭിക്കും.',
+    toastNewPost: '📝 പുതിയ കുറിപ്പ്: "{title}"',
+    notifNewPostTitle: 'പുതിയ കുറിപ്പ്: {title}',
+    notifNewPostBody: 'ഒരു പുതിയ ജേണൽ കുറിപ്പ് പ്രസിദ്ധീകരിച്ചു.'
+  },
+  ta: {
+    code: 'ta',
+    name: 'Tamil',
+    native: 'தமிழ்',
+    quoteHtml: '"ஒவ்வொரு நாளையும் நீங்கள் அறுவடை செய்யும் பயிரைக் கொண்டு அளவிடாதீர்கள், மாறாக <code>நீங்கள் விதைக்கும் விதைகளைக் கொண்டு</code> மதிப்பிடுங்கள்." — <code>ராபர்ட் லூயிஸ் ஸ்டீவன்சன்</code>',
+    toastLangChanged: 'மொழி தமிழுக்கு மாற்றப்பட்டது ✨',
+    toastNotifyMuted: '🔕 அறிவிப்புகள் முடக்கப்பட்டன.',
+    toastNotifySubscribed: '🔔 இணைக்கப்பட்டது! புதிய பதிவுகள் வரும்போது அறிவிப்பு வரும்.',
+    notifWelcomeTitle: 'அன்ஃபில்டர்டு ஜர்னல்',
+    notifWelcomeBody: 'அறிவிப்புகள் இயக்கப்பட்டன! புதிய பதிவுகள் வெளியிடப்படும்போது உங்களுக்குத் தெரிவிக்கப்படும்.',
+    toastNewPost: '📝 புதிய பதிவு: "{title}"',
+    notifNewPostTitle: 'புதிய பதிவு: {title}',
+    notifNewPostBody: 'ஒரு புதிய ஜர்னல் பதிவு வெளியிடப்பட்டுள்ளது.'
+  }
+};
+
+function getCurrentLanguage() {
+  return localStorage.getItem('user-language') || 'en';
+}
+
+function getCurrentLangDict() {
+  const lang = getCurrentLanguage();
+  return TRANSLATIONS[lang] || TRANSLATIONS.en;
+}
+
+function initLanguage() {
+  const savedLang = getCurrentLanguage();
+  applyLanguage(savedLang, false);
+}
+
+function renderLanguagePickerGrid(currentLang) {
+  const grid = document.getElementById('language-picker-grid');
+  if (!grid) return;
+
+  grid.innerHTML = LANGUAGES.map(lang => `
+    <div class="language-choice-card ${lang.id === currentLang ? 'is-active' : ''}" data-lang-id="${lang.id}" role="button" tabindex="0" aria-label="Select ${lang.name}">
+      <div class="language-card-left">
+        <span class="language-icon-badge">${lang.code}</span>
+        <div class="language-choice-info">
+          <span class="language-choice-name">${lang.native}</span>
+          <span class="language-choice-native">${lang.name}</span>
+        </div>
+      </div>
+      <span class="language-choice-check">✓</span>
+    </div>
+  `).join('');
+
+  grid.querySelectorAll('.language-choice-card').forEach(card => {
+    card.addEventListener('click', () => {
+      triggerHaptic('SELECTION');
+      const langId = card.getAttribute('data-lang-id');
+      if (langId !== getCurrentLanguage()) {
+        applyLanguage(langId, true);
+      }
+    });
+  });
+}
+
+function applyLanguage(langId, notify = false) {
+  const lang = TRANSLATIONS[langId] ? langId : 'en';
+  localStorage.setItem('user-language', lang);
+  const t = TRANSLATIONS[lang] || TRANSLATIONS.en;
+
+  // Set html & body lang attributes for proper typography
+  document.documentElement.setAttribute('lang', lang);
+  if (document.body) {
+    document.body.setAttribute('lang', lang);
+  }
+
+  // ONLY change the Quote of the Day in the sidebar
+  const quoteText = document.getElementById('quote-text');
+  if (quoteText) {
+    quoteText.innerHTML = t.quoteHtml;
+  }
+
+  renderLanguagePickerGrid(lang);
+
+  if (notify) {
+    showToast(t.toastLangChanged);
+  }
+}
+
 // ---------------- Application Bootstrap ----------------
 async function initApp() {
+  initLanguage();
   initTheme();
   setupProfileModal();
 
@@ -238,6 +356,8 @@ function setupSettingsModal() {
   function openSettings() {
     triggerHaptic('LIGHT');
     updateNotifyBadge();
+    const currentLang = getCurrentLanguage();
+    renderLanguagePickerGrid(currentLang);
     const currentTheme = localStorage.getItem('user-theme') || 'ink';
     renderThemePickerGrid(currentTheme);
     settingsModal.style.display = 'flex';
@@ -284,7 +404,7 @@ function setupSettingsModal() {
       if (updateBadge) {
         updateBadge.textContent = 'Up to date ✓';
       }
-      showToast("✨ You are running the latest version of Unfiltered Journal (v1.0.0)");
+      showToast('✨ You are running the latest version of Unfiltered Journal.');
     });
   }
 }
@@ -492,19 +612,25 @@ function matchesSearch(post, term) {
   const p = parseDateParts(post.date);
   const dateStrings = [];
   if (p) {
-    const fullMonth = MONTH_NAMES[p.month - 1].toLowerCase();
-    const shortMonth = MONTH_SHORT[p.month - 1].toLowerCase();
     const yearStr = String(p.year);
-    dateStrings.push(
-      post.date,
-      yearStr,
-      fullMonth,
-      shortMonth,
-      `${shortMonth} ${yearStr}`,
-      `${fullMonth} ${yearStr}`,
-      `${yearStr} ${shortMonth}`,
-      `${yearStr} ${fullMonth}`
-    );
+    dateStrings.push(post.date, yearStr);
+    ['en', 'ml', 'ta'].forEach(langCode => {
+      const dict = TRANSLATIONS[langCode];
+      if (dict && dict.monthNames && dict.monthShort) {
+        const fullM = dict.monthNames[p.month - 1]?.toLowerCase();
+        const shortM = dict.monthShort[p.month - 1]?.toLowerCase();
+        if (fullM) {
+          dateStrings.push(
+            fullM,
+            shortM,
+            `${shortM} ${yearStr}`,
+            `${fullM} ${yearStr}`,
+            `${yearStr} ${shortM}`,
+            `${yearStr} ${fullM}`
+          );
+        }
+      }
+    });
   }
 
   const haystack = [
@@ -589,14 +715,11 @@ function renderPost(state) {
   const { post, slug, liked, saved } = state;
   const dateLabel = formatDate(post.date);
   const tags = (post.tags || [])
-    .map(t => `<span>${escapeHtml(t)}</span>`)
+    .map(tItem => `<span>${escapeHtml(tItem)}</span>`)
     .join('');
   const image = post.image
     ? `<img src="${escapeAttr(post.image)}" alt="${escapeAttr(post.title || '')}">`
     : '';
-
-  const likeCount = post.likesCount || 85;
-  const shareCount = post.sharesCount || 85;
 
   return `
     <article class="post" data-slug="${escapeAttr(slug)}" data-id="${escapeAttr(post.id || '')}">
@@ -606,18 +729,16 @@ function renderPost(state) {
       ${image}
       ${tags ? `<div class="post-tags">${tags}</div>` : ''}
       <div class="post-actions">
-        <!-- Public: Like Button (+1 on click) -->
+        <!-- Public: Like Button -->
         <button class="action-btn like-btn ${liked ? 'is-active' : ''}" data-id="${escapeAttr(post.id || '')}" data-slug="${escapeAttr(slug)}" aria-pressed="${liked}">
           <span class="icon">${liked ? '♥' : '♡'}</span>
           <span class="label">Like</span>
-          <span class="count" data-role="like-count">${formatCount(likeCount)}</span>
         </button>
 
-        <!-- Public: Share Button (+1 on click) -->
+        <!-- Public: Share Button -->
         <button class="action-btn share-btn" data-id="${escapeAttr(post.id || '')}" data-slug="${escapeAttr(slug)}">
           <span class="icon">⤴</span>
           <span class="label">Share</span>
-          <span class="count" data-role="share-count">${formatCount(shareCount)}</span>
         </button>
 
         <!-- Public: Save / Bookmark Button (Private to this user/device) -->
@@ -659,29 +780,22 @@ function attachPostHandlers(state) {
   const editBtn = article.querySelector('.edit-btn');
   const deleteBtn = article.querySelector('.delete-btn');
 
-  // 1. Like Button Handler (Public: +1 on click, toggleable)
+  // 1. Like Button Handler (Public: toggleable)
   if (likeBtn) {
     likeBtn.addEventListener('click', async () => {
       triggerHaptic('LIGHT');
-      const isCurrentlyLiked = state.liked;
-      const likeDelta = isCurrentlyLiked ? -1 : 1;
-
-      state.liked = !isCurrentlyLiked;
+      state.liked = !state.liked;
       localStorage.setItem(STORAGE_PREFIX + 'liked:' + slug, String(state.liked));
 
-      // Optimistic UI update
-      post.likesCount = Math.max(85, (post.likesCount || 85) + likeDelta);
+      // UI update
       likeBtn.classList.toggle('is-active', state.liked);
       likeBtn.setAttribute('aria-pressed', String(state.liked));
       likeBtn.querySelector('.icon').textContent = state.liked ? '♥' : '♡';
-      likeBtn.querySelector('[data-role="like-count"]').textContent = formatCount(post.likesCount);
-
-      localStorage.setItem(STORAGE_PREFIX + 'likes:' + slug, String(post.likesCount - (state.liked ? 1 : 0)));
 
       if (post.id && post.isFirestore) {
         try {
           await updateDoc(doc(db, "posts", post.id), {
-            likesCount: increment(likeDelta)
+            likesCount: increment(state.liked ? 1 : -1)
           });
         } catch (err) {
           console.error("Failed to update likes in Firestore:", err);
@@ -690,24 +804,10 @@ function attachPostHandlers(state) {
     });
   }
 
-  // 2. Share Button Handler (Public: +1 each time user shares)
+  // 2. Share Button Handler (Public)
   if (shareBtn) {
     shareBtn.addEventListener('click', async () => {
       triggerHaptic('LIGHT');
-
-      // Increment share count by +1
-      post.sharesCount = (post.sharesCount || 85) + 1;
-      localStorage.setItem(STORAGE_PREFIX + 'shares:' + slug, String(post.sharesCount));
-      const shareCountEl = shareBtn.querySelector('[data-role="share-count"]');
-      if (shareCountEl) shareCountEl.textContent = formatCount(post.sharesCount);
-
-      if (post.id && post.isFirestore) {
-        try {
-          await updateDoc(doc(db, "posts", post.id), {
-            sharesCount: increment(1)
-          });
-        } catch (e) { /* ignore */ }
-      }
 
       const url = window.location.href.split('#')[0] + '#' + slug;
       const title = post.title || document.title;
@@ -1064,17 +1164,11 @@ function setupAdminControls() {
         btnPublish.disabled = true;
         btnPublish.textContent = "Publishing...";
 
-        // Random baseline between 85 and 200 for upcoming posts
-        const randomLikes = Math.floor(Math.random() * (200 - 85 + 1)) + 85;
-        const randomShares = Math.floor(Math.random() * (200 - 85 + 1)) + 85;
-
         await addDoc(collection(db, "posts"), {
           title,
           body,
           tags,
           date,
-          likesCount: randomLikes,
-          sharesCount: randomShares,
           createdAt: serverTimestamp()
         });
         document.getElementById("post-title-input").value = "";
@@ -1174,16 +1268,6 @@ function cssEscape(str) {
 }
 
 // ---------------- Date & Time Utilities (Prevents Year/Month Collapsing) ----------------
-const MONTH_NAMES = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-];
-
-const MONTH_SHORT = [
-  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-];
-
 function parseDateParts(dateStr) {
   if (!dateStr) return null;
   const parts = String(dateStr).trim().split('-');
@@ -1194,6 +1278,16 @@ function parseDateParts(dateStr) {
   if (isNaN(year) || isNaN(month) || isNaN(day)) return null;
   return { year, month, day };
 }
+
+const MONTH_NAMES = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+
+const MONTH_SHORT = [
+  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+];
 
 function formatDate(dateStr) {
   const p = parseDateParts(dateStr);
@@ -1298,16 +1392,20 @@ function showToast(message, duration = 3500) {
 // ---------------- Post Notification Dispatcher (Crash-Proof) ----------------
 async function dispatchPostNotification(post) {
   if (!post) return;
+  const t = getCurrentLangDict();
   const postTitle = post.title || 'Untitled Entry';
   const postSnippet = post.body
     ? (post.body.slice(0, 90).trim() + (post.body.length > 90 ? '...' : ''))
-    : 'A new unfiltered journal entry is live.';
+    : (t.notifNewPostBody || 'A new unfiltered journal entry is live.');
 
-  // 1. In-app toast alert (always works safely across web & mobile)
-  showToast(`📝 New Post: "${postTitle}"`);
+  // 1. In-app toast alert (in chosen language)
+  const toastMsg = (t.toastNewPost || '📝 New Post: "{title}"').replace('{title}', postTitle);
+  showToast(toastMsg);
 
   const isSubscribed = localStorage.getItem(STORAGE_PREFIX + 'notify') === 'true';
   if (!isSubscribed) return;
+
+  const notifTitle = (t.notifNewPostTitle || 'New Post: {title}').replace('{title}', postTitle);
 
   // 2. Native Android Local Notification (System status bar alert)
   if (LocalNotifications) {
@@ -1315,7 +1413,7 @@ async function dispatchPostNotification(post) {
       await LocalNotifications.schedule({
         notifications: [{
           id: Math.floor(Math.random() * 1000000) + 1,
-          title: `New Post: ${postTitle}`,
+          title: notifTitle,
           body: postSnippet,
           schedule: { at: new Date(Date.now() + 100) },
           smallIcon: 'ic_launcher_foreground',
@@ -1332,7 +1430,7 @@ async function dispatchPostNotification(post) {
   const isNative = window.Capacitor?.isNativePlatform?.();
   if (!isNative && 'Notification' in window && Notification.permission === 'granted') {
     try {
-      const notif = new Notification(`New Post: ${postTitle}`, {
+      const notif = new Notification(notifTitle, {
         body: postSnippet,
         icon: 'profile.png',
         tag: 'post-' + (post.id || post.slug || Date.now())
@@ -1358,7 +1456,7 @@ function initNotifyButton() {
   let isActive = localStorage.getItem(notifyKey) === 'true';
 
   function renderNotifyBtn() {
-    notifyBtn.textContent = isActive ? 'Notified ✓' : 'Notify';
+    notifyBtn.textContent = isActive ? 'Subscribed ✓' : 'Notify Me';
     notifyBtn.classList.toggle('is-active', isActive);
     notifyBtn.setAttribute('aria-pressed', String(isActive));
   }
@@ -1367,12 +1465,13 @@ function initNotifyButton() {
 
   notifyBtn.addEventListener('click', async () => {
     triggerHaptic('MEDIUM');
+    const t = getCurrentLangDict();
 
     if (isActive) {
       isActive = false;
       localStorage.setItem(notifyKey, 'false');
       renderNotifyBtn();
-      showToast("🔕 Notifications muted.");
+      showToast(t.toastNotifyMuted);
       return;
     }
 
@@ -1391,8 +1490,8 @@ function initNotifyButton() {
           await LocalNotifications.schedule({
             notifications: [{
               id: 9999,
-              title: 'Unfiltered Journal',
-              body: "Notifications enabled! You will be alerted when a new post is published.",
+              title: t.notifWelcomeTitle || 'Unfiltered Journal',
+              body: t.notifWelcomeBody || "Notifications enabled! You will be alerted when a new post is published.",
               schedule: { at: new Date(Date.now() + 200) },
               smallIcon: 'ic_launcher_foreground',
               iconColor: '#e8a34d'
@@ -1402,7 +1501,7 @@ function initNotifyButton() {
       } catch (e) {
         console.warn("LocalNotifications setup:", e);
       }
-      showToast("🔔 Subscribed! You'll be alerted when new posts go live.");
+      showToast(t.toastNotifySubscribed);
       return;
     }
 
@@ -1414,8 +1513,8 @@ function initNotifyButton() {
           permission = await Notification.requestPermission();
         }
         if (permission === 'granted') {
-          new Notification("Unfiltered Journal — R Rajkumar Padmanabhan", {
-            body: "Notifications enabled! You will be alerted whenever Rajkumar publishes a new post.",
+          new Notification(t.notifWelcomeTitle || "Unfiltered Journal", {
+            body: t.notifWelcomeBody || "Notifications enabled! You will be alerted when a new post is published.",
             icon: "logo.png"
           });
         }
@@ -1424,7 +1523,7 @@ function initNotifyButton() {
       }
     }
 
-    showToast("🔔 Subscribed! You'll be alerted when new posts are uploaded.");
+    showToast(t.toastNotifySubscribed);
   });
 }
 
