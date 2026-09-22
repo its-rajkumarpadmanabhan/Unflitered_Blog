@@ -23,8 +23,6 @@ import {
 import { INITIAL_POSTS } from './initial-posts.js';
 
 const STORAGE_PREFIX = 'raj-blog:';
-const MASTER_ADMIN_EMAIL = "rrajkumarpadmanabhan@gmail.com";
-const MASTER_ADMIN_PASS = "deepu@0746";
 
 const ALLOWED_ADMINS = [
   "rrajkumarpadmanabhan@gmail.com",
@@ -1022,9 +1020,6 @@ function setupAdminControls() {
   const emailInput = document.getElementById("admin-email");
   const passwordInput = document.getElementById("admin-password");
 
-  if (emailInput && !emailInput.value) emailInput.value = MASTER_ADMIN_EMAIL;
-  if (passwordInput && !passwordInput.value) passwordInput.value = MASTER_ADMIN_PASS;
-
   // Restore stored session if present
   try {
     const storedSession = JSON.parse(localStorage.getItem(STORAGE_PREFIX + 'admin_session') || 'null');
@@ -1072,32 +1067,23 @@ function setupAdminControls() {
       try {
         btnLogin.disabled = true;
         btnLogin.textContent = "Signing In...";
-        let loginSuccess = false;
 
-        try {
-          await signInWithEmailAndPassword(auth, email, password);
-          loginSuccess = true;
-        } catch (firebaseErr) {
-          console.warn("Firebase direct sign-in fallback:", firebaseErr);
-          if (email.toLowerCase() === MASTER_ADMIN_EMAIL.toLowerCase() && password === MASTER_ADMIN_PASS) {
-            loginSuccess = true;
-          } else {
-            throw firebaseErr;
-          }
-        }
+        await signInWithEmailAndPassword(auth, email, password);
 
-        if (loginSuccess) {
-          localStorage.setItem(STORAGE_PREFIX + 'admin_session', JSON.stringify({
-            email: email,
-            loginTime: Date.now()
-          }));
-          activateAdminView();
-          showToast("✨ Welcome back, Rajkumar!");
-          triggerHaptic('SUCCESS');
-          cleanupDuplicateFirestorePosts(true);
-        }
+        if (passwordInput) passwordInput.value = "";
+
+        localStorage.setItem(STORAGE_PREFIX + 'admin_session', JSON.stringify({
+          email: email,
+          loginTime: Date.now()
+        }));
+        activateAdminView();
+        showToast("✨ Welcome back, Rajkumar!");
+        triggerHaptic('SUCCESS');
+        cleanupDuplicateFirestorePosts(true);
       } catch (err) {
+        console.error("Admin sign in failed:", err);
         showToast("⛔ Access denied or invalid credentials.");
+        triggerHaptic('ERROR');
       } finally {
         btnLogin.disabled = false;
         btnLogin.textContent = "Sign In";
@@ -1110,6 +1096,7 @@ function setupAdminControls() {
     btnLogout.addEventListener("click", async () => {
       try {
         localStorage.removeItem(STORAGE_PREFIX + 'admin_session');
+        if (passwordInput) passwordInput.value = "";
         await signOut(auth);
       } catch (err) {
         console.warn("Sign out err:", err);
