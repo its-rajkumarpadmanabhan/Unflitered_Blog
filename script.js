@@ -1020,6 +1020,9 @@ function setupAdminControls() {
   const emailInput = document.getElementById("admin-email");
   const passwordInput = document.getElementById("admin-password");
 
+  if (emailInput) emailInput.value = "";
+  if (passwordInput) passwordInput.value = "";
+
   // Restore stored session if present
   try {
     const storedSession = JSON.parse(localStorage.getItem(STORAGE_PREFIX + 'admin_session') || 'null');
@@ -1031,7 +1034,12 @@ function setupAdminControls() {
   if (adminToggle && adminDrawer) {
     adminToggle.addEventListener("click", () => {
       triggerHaptic('LIGHT');
-      adminDrawer.style.display = adminDrawer.style.display === "none" ? "block" : "none";
+      if (adminDrawer.style.display === "none") {
+        if (passwordInput) passwordInput.value = "";
+        adminDrawer.style.display = "block";
+      } else {
+        adminDrawer.style.display = "none";
+      }
     });
   }
 
