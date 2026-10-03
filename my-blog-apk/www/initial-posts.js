@@ -1,5 +1,68 @@
 export const INITIAL_POSTS = [
   {
+    "date": "2026-10-02",
+    "title": "Keep the Wonder",
+    "body": "Growing older doesn't mean we have to lose our curiosity. I still want to be surprised by places, people, ideas, and the little things that make an ordinary life feel alive.",
+    "image": "",
+    "tags": [
+      "curiosity"
+    ]
+  },
+  {
+    "date": "2026-10-01",
+    "title": "A Different Morning",
+    "body": "A new month doesn't magically change everything, but it gives us a small reminder that we can begin again. Sometimes that's all the encouragement we need.",
+    "image": "",
+    "tags": [
+      "renewal"
+    ]
+  },
+  {
+    "date": "2026-09-29",
+    "title": "The Value of Enough",
+    "body": "There will always be another milestone waiting beyond the one I reach today. But if I never stop to appreciate what I already have, I might spend my whole life arriving somewhere without ever feeling there.",
+    "image": "",
+    "tags": [
+      "contentment"
+    ]
+  },
+  {
+    "date": "2026-09-27",
+    "title": "Leave Some Room",
+    "body": "I've learned that plans are useful, but life needs a little empty space too. Some of the best moments arrive when there was never a plan for them.",
+    "image": "",
+    "tags": [
+      "spontaneity"
+    ]
+  },
+  {
+    "date": "2026-09-25",
+    "title": "The Version Nobody Sees",
+    "body": "There is a version of me that exists only in quiet moments—the one who thinks deeply, worries silently, dreams freely, and keeps trying. Perhaps knowing that person is part of knowing myself.",
+    "image": "",
+    "tags": [
+      "self"
+    ]
+  },
+  {
+    "date": "2026-09-23",
+    "title": "Something to Look Forward To",
+    "body": "Life feels a little lighter when there is something ahead that quietly excites you. It doesn't have to be a huge dream; even a small reason to look forward can change an ordinary day.",
+    "image": "",
+    "tags": [
+      "hope"
+    ]
+  },
+  {
+    "date": "2026-09-21",
+    "title": "A New Direction",
+    "body": "Sometimes the path becomes clearer only after we stop forcing ourselves to follow the old one. Maybe changing direction isn't losing the way; maybe it's finally listening to yourself.",
+    "image": "",
+    "tags": [
+      "direction"
+    ]
+  },
+  {
     "date": "2026-09-20",
     "title": "Before the New Week",
     "body": "Tonight feels like a small pause between what has been and what comes next. I don't need to predict the week ahead; I only want to enter it with an open mind.",

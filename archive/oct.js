@@ -60,5 +60,25 @@ window.SITE_POSTS.push(
   "body": "I stopped waiting for life to become perfect before allowing myself to feel peaceful. Somehow, accepting the imperfect version of today made tomorrow feel lighter.",
   "image": "",
   "tags": ["stillness"]
+},
+
+// ===============================
+// October 2026
+// Theme: Renewal, Curiosity & Wonder
+// ===============================
+
+{
+  "date": "2026-10-01",
+  "title": "A Different Morning",
+  "body": "A new month doesn't magically change everything, but it gives us a small reminder that we can begin again. Sometimes that's all the encouragement we need.",
+  "image": "",
+  "tags": ["renewal"]
+},
+{
+  "date": "2026-10-02",
+  "title": "Keep the Wonder",
+  "body": "Growing older doesn't mean we have to lose our curiosity. I still want to be surprised by places, people, ideas, and the little things that make an ordinary life feel alive.",
+  "image": "",
+  "tags": ["curiosity"]
 }
 );
