@@ -1,5 +1,41 @@
 export const INITIAL_POSTS = [
   {
+    "date": "2026-10-09",
+    "title": "Beyond the Frame",
+    "body": "We see only small pieces of other people's lives and sometimes mistake those pieces for the whole picture. I'm learning to build my own story without measuring its worth against a scene from someone else's.",
+    "image": "",
+    "tags": [
+      "perspective"
+    ]
+  },
+  {
+    "date": "2026-10-07",
+    "title": "The Courage to Begin Again",
+    "body": "Starting over can feel strange when you've already invested so much in another direction. But time spent learning is never entirely wasted, and choosing differently doesn't erase the courage it took to begin.",
+    "image": "",
+    "tags": [
+      "reinvention"
+    ]
+  },
+  {
+    "date": "2026-10-05",
+    "title": "Ordinary Magic",
+    "body": "Nothing extraordinary happened today, and somehow that made it beautiful. A familiar place, an unhurried afternoon, and a few moments without worry reminded me that a life doesn't need constant excitement to feel meaningful.",
+    "image": "",
+    "tags": [
+      "ordinary"
+    ]
+  },
+  {
+    "date": "2026-10-03",
+    "title": "The Art of Not Knowing",
+    "body": "I've spent so much time trying to understand how everything will turn out. Maybe there's a different kind of freedom in accepting that some questions are meant to travel with us for a while, without demanding an answer.",
+    "image": "",
+    "tags": [
+      "uncertainty"
+    ]
+  },
+  {
     "date": "2026-10-02",
     "title": "Keep the Wonder",
     "body": "Growing older doesn't mean we have to lose our curiosity. I still want to be surprised by places, people, ideas, and the little things that make an ordinary life feel alive.",
