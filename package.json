@@ -1,6 +1,6 @@
 {
   "name": "unfiltered-journal",
-  "version": "1.0.0",
+  "version": "2.5.0",
   "description": "Unfiltered Journal by R Rajkumar Padmanabhan",
   "scripts": {
     "start": "npx serve . -l 3000",

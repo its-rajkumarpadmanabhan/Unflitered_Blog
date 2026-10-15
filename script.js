@@ -115,43 +115,206 @@ const TRANSLATIONS = {
   en: {
     code: 'en',
     name: 'English',
+    native: 'English',
+    quoteHeader: 'Quote Of The Day',
     quoteHtml: '"Don\'t judge<code> each day </code> by the harvest you reap but by the seeds <code>that you plant.</code>" — Robert Louis Stevenson',
+    aboutHeader: 'About',
+    aboutText: "Hey, I'm R Rajkumar Padmanabhan. This is where I write down what I'm working on and thinking about, unfiltered.",
+    metaBasedLabel: 'Based in',
+    metaBasedValue: 'India, Kerala',
+    metaJoinedLabel: 'Joined',
+    metaEntriesLabel: 'Entries',
+    searchPlaceholder: 'Search entries, tags, aug 2025…',
+    feedSortLabel: 'Newest first',
+    filterAll: 'All Years',
+    filterSaved: 'Saved',
+    filterSavedTitle: 'View your private saved posts',
+    emptyLoading: 'Loading entries from cloud database…',
+    emptyNoEntries: 'No journal entries found for {year}.',
+    emptySearchMatch: 'No entries match "{term}" in {year}.',
+    emptySavedTitle: 'No saved stories yet',
+    emptySavedDesc: 'Tap the bookmark icon on any journal entry to save it to your private reading list. Only you can view your saved entries on this device.',
+    btnLike: 'Like',
+    btnLiked: 'Liked',
+    btnShare: 'Share',
+    btnSave: 'Save',
+    btnSaved: 'Saved',
+    btnEdit: 'Edit',
+    btnDelete: 'Delete',
+    btnReadMore: 'Read more',
+    btnShowLess: 'Show less',
+    badgeEntry: 'entry',
+    badgeEntries: 'entries',
+    footerText: 'Built and written by R Rajkumar Padmanabhan. Unfiltered Journal.',
+    settingsModalTitle: '⚙ App Preferences & Themes',
+    settingsSubtitle: 'Personalize your reading experience and visual styles',
+    settingsLangHeading: 'Language',
+    settingsLangHint: 'Select language',
+    settingsThemeHeading: 'Color Themes',
+    settingsThemeHint: 'Select a palette',
+    settingsActionsHeading: 'Quick Actions',
+    settingsNotifyLabel: 'Post Notifications',
+    settingsNotifyDesc: 'Get alerted when new journal entries go live',
+    settingsNotifyEnable: 'Enable',
+    settingsNotifySubscribed: 'Subscribed ✓',
+    settingsUpdateLabel: 'Update App',
+    settingsUpdateDesc: 'You are using the latest version',
+    settingsUpdateBadge: 'Up to date',
+    settingsUpdateLatestBadge: 'Up to date ✓',
+    settingsAppName: 'Unfiltered Journal',
+    settingsAppVersion: 'Version 1.0.0 • By R Rajkumar Padmanabhan',
+    profileRole: 'Software Developer & Writer',
+    profileEmailBtn: 'Email Me',
     toastLangChanged: 'Language set to English ✨',
     toastNotifyMuted: '🔕 Notifications muted.',
     toastNotifySubscribed: "🔔 Subscribed! You'll be alerted when new posts go live.",
+    toastSaved: '🔖 Saved to your reading list',
+    toastUnsaved: 'Removed from saved stories',
+    toastLinkCopied: 'Link Copied!',
+    toastUpdateApp: '✨ You are running the latest version of Unfiltered Journal.',
     notifWelcomeTitle: 'Unfiltered Journal',
     notifWelcomeBody: 'Notifications enabled! You will be alerted when a new post is published.',
     toastNewPost: '📝 New Post: "{title}"',
     notifNewPostTitle: 'New Post: {title}',
-    notifNewPostBody: 'A new unfiltered journal entry is live.'
+    notifNewPostBody: 'A new unfiltered journal entry is live.',
+    months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   },
   ml: {
     code: 'ml',
     name: 'Malayalam',
     native: 'മലയാളം',
+    quoteHeader: 'ഇന്നത്തെ ചിന്ത',
     quoteHtml: '"ഓരോ ദിവസത്തെയും നിങ്ങൾ കൊയ്യുന്ന വിളവുകൊണ്ടല്ല, മറിച്ച് <code>നിങ്ങൾ പാകുന്ന വിത്തുകൾ കൊണ്ടാണ്</code> വിലയിരുത്തേണ്ടത്." — <code>റോബർട്ട് ലൂയിസ് സ്റ്റീവൻസൺ</code>',
+    aboutHeader: 'വിവരണം',
+    aboutText: "നമസ്കാരം, ഞാൻ ആർ രാജ്കുമാർ പത്മനാഭൻ. ഞാൻ ചെയ്യുന്ന കാര്യങ്ങളും ചിന്തകളും തുറന്നു രേഖപ്പെടുത്തുന്ന ഇടമാണിത്, അൺഫിൽറ്റേർഡ് ആയി.",
+    metaBasedLabel: 'താമസം',
+    metaBasedValue: 'ഇന്ത്യ, കേരളം',
+    metaJoinedLabel: 'തുടങ്ങിയത്',
+    metaEntriesLabel: 'കുറിപ്പുകൾ',
+    searchPlaceholder: 'കുറിപ്പുകൾ, ടാഗുകൾ, തീയതികൾ തിരയുക…',
+    feedSortLabel: 'പുതിയത് ആദ്യം',
+    filterAll: 'എല്ലാ വർഷങ്ങളും',
+    filterSaved: 'സേവ് ചെയ്തവ',
+    filterSavedTitle: 'നിങ്ങളുടെ സ്വകാര്യ സേവ് ചെയ്ത കുറിപ്പുകൾ കാണുക',
+    emptyLoading: 'ക്ലൗഡ് ഡാറ്റാബേസിൽ നിന്ന് കുറിപ്പുകൾ ലഭ്യമാക്കുന്നു…',
+    emptyNoEntries: '{year}-ൽ കുറിപ്പുകളൊന്നും കണ്ടെത്തിയില്ല.',
+    emptySearchMatch: '"{term}" എന്നതിന് അനുയോജ്യമായ കുറിപ്പുകളൊന്നും {year}-ൽ കണ്ടെത്തിയില്ല.',
+    emptySavedTitle: 'സേവ് ചെയ്ത കുറിപ്പുകളൊന്നുമില്ല',
+    emptySavedDesc: 'സ്വകാര്യമായി പിന്നീട് വായിക്കാൻ ഏതെങ്കിലും ജേണൽ കുറിപ്പിലെ ബുക്ക്മാർക്ക് ഐക്കണിൽ 🔖 തൊടുക. ഈ ഉപകരണത്തിൽ നിങ്ങൾക്ക് മാത്രമേ അവ കാണാനാകൂ.',
+    btnLike: 'ഇഷ്ടപ്പെടുക',
+    btnLiked: 'ഇഷ്ടപ്പെട്ടു',
+    btnShare: 'പങ്കിടുക',
+    btnSave: 'സേവ്',
+    btnSaved: 'സേവ് ചെയ്തു',
+    btnEdit: 'തിരുത്തുക',
+    btnDelete: 'നീക്കം ചെയ്യുക',
+    btnReadMore: 'കൂടുതൽ വായിക്കുക',
+    btnShowLess: 'കുറച്ചു കാണിക്കുക',
+    badgeEntry: 'കുറിപ്പ്',
+    badgeEntries: 'കുറിപ്പുകൾ',
+    footerText: 'രചനയും നിർമ്മാണവും: R Rajkumar Padmanabhan. Unfiltered Journal.',
+    settingsModalTitle: '⚙ ആപ്പ് ക്രമീകരണങ്ങളും തീമുകളും',
+    settingsSubtitle: 'നിങ്ങളുടെ വായനാനുഭവവും രൂപകൽപ്പനയും ഇഷ്ടാനുസൃതമാക്കുക',
+    settingsLangHeading: 'ഭാഷ',
+    settingsLangHint: 'ഭാഷ തിരഞ്ഞെടുക്കുക',
+    settingsThemeHeading: 'വർണ്ണ തീമുകൾ',
+    settingsThemeHint: 'തീം തിരഞ്ഞെടുക്കുക',
+    settingsActionsHeading: 'ദ്രുത പ്രവർത്തനങ്ങൾ',
+    settingsNotifyLabel: 'പോസ്റ്റ് അറിയിപ്പുകൾ',
+    settingsNotifyDesc: 'പുതിയ കുറിപ്പുകൾ പ്രസിദ്ധീകരിക്കുമ്പോൾ തത്സമയം അറിയുക',
+    settingsNotifyEnable: 'ഓണാക്കുക',
+    settingsNotifySubscribed: 'സജീവമാണ് ✓',
+    settingsUpdateLabel: 'ആപ്പ് അപ്ഡേറ്റ്',
+    settingsUpdateDesc: 'ഏറ്റവും പുതിയ പതിപ്പാണ് ഉപയോഗിക്കുന്നത്',
+    settingsUpdateBadge: 'ഏറ്റവും പുതിയത്',
+    settingsUpdateLatestBadge: 'ഏറ്റവും പുതിയത് ✓',
+    settingsAppName: 'Unfiltered Journal',
+    settingsAppVersion: 'പതിപ്പ് 1.0.0 • By R Rajkumar Padmanabhan',
+    profileRole: 'സോഫ്റ്റ്‌വെയർ ഡെവലപ്പറും എഴുത്തുകാരനും',
+    profileEmailBtn: 'ഇമെയിൽ അയക്കുക',
     toastLangChanged: 'ഭാഷ മലയാളത്തിലേക്ക് മാറ്റി ✨',
     toastNotifyMuted: '🔕 അറിയിപ്പുകൾ ഓഫാക്കി.',
     toastNotifySubscribed: '🔔 സബ്‌സ്‌ക്രൈബ് ചെയ്തു! പുതിയ പോസ്റ്റുകൾ വരുമ്പോൾ അറിയിപ്പ് ലഭിക്കും.',
-    notifWelcomeTitle: 'അൺഫിൽറ്റേർഡ് ജേണൽ',
+    toastSaved: '🔖 സ്വകാര്യ വായനാ ലിസ്റ്റിലേക്ക് സേവ് ചെയ്തു',
+    toastUnsaved: 'സേവ് ചെയ്തവയിൽ നിന്ന് നീക്കം ചെയ്തു',
+    toastLinkCopied: 'ലിങ്ക് പകർത്തി!',
+    toastUpdateApp: '✨ നിങ്ങൾ ഉപയോഗിക്കുന്നത് Unfiltered Journal-ന്റെ ഏറ്റവും പുതിയ പതിപ്പാണ്.',
+    notifWelcomeTitle: 'Unfiltered Journal',
     notifWelcomeBody: 'അറിയിപ്പുകൾ സജീവമാക്കി! പുതിയ കുറിപ്പുകൾ പ്രസിദ്ധീകരിക്കുമ്പോൾ നിങ്ങൾക്ക് അറിയിപ്പ് ലഭിക്കും.',
     toastNewPost: '📝 പുതിയ കുറിപ്പ്: "{title}"',
     notifNewPostTitle: 'പുതിയ കുറിപ്പ്: {title}',
-    notifNewPostBody: 'ഒരു പുതിയ ജേണൽ കുറിപ്പ് പ്രസിദ്ധീകരിച്ചു.'
+    notifNewPostBody: 'ഒരു പുതിയ ജേണൽ കുറിപ്പ് പ്രസിദ്ധീകരിച്ചു.',
+    months: ['ജനുവരി', 'ഫെബ്രുവരി', 'മാർച്ച്', 'ഏപ്രിൽ', 'മേയ്', 'ജൂൺ', 'ജൂലൈ', 'ഓഗസ്റ്റ്', 'സെപ്റ്റംബർ', 'ഒക്ടോബർ', 'നവംബർ', 'ഡിസംബർ'],
+    monthsShort: ['ജനു', 'ഫെബ്', 'മാർ', 'ഏപ്രി', 'മേയ്', 'ജൂൺ', 'ജൂലൈ', 'ഓഗ', 'സെപ്റ്റം', 'ഒക്ടോ', 'നവം', 'ഡിസം']
   },
   ta: {
     code: 'ta',
     name: 'Tamil',
     native: 'தமிழ்',
+    quoteHeader: 'இன்றைய சிந்தனை',
     quoteHtml: '"ஒவ்வொரு நாளையும் நீங்கள் அறுவடை செய்யும் பயிரைக் கொண்டு அளவிடாதீர்கள், மாறாக <code>நீங்கள் விதைக்கும் விதைகளைக் கொண்டு</code> மதிப்பிடுங்கள்." — <code>ராபர்ட் லூயிஸ் ஸ்டீவன்சன்</code>',
+    aboutHeader: 'சுயவிவரம்',
+    aboutText: "வணக்கம், நான் ஆர் ராஜ்குமார் பத்மநாபன். நான் உருவாக்கும் பணிகள் மற்றும் சிந்தனைகளை வெளிப்படையாகப் பதிவு செய்யும் தளம் இது, அன்ஃபில்டர்டாக.",
+    metaBasedLabel: 'இருப்பிடம்',
+    metaBasedValue: 'இந்தியா, கேரளா',
+    metaJoinedLabel: 'தொடங்கியது',
+    metaEntriesLabel: 'பதிவுகள்',
+    searchPlaceholder: 'பதிவுகள், குறிச்சொற்கள், தேதிகளைத் தேடுங்கள்…',
+    feedSortLabel: 'புதியது முதலில்',
+    filterAll: 'அனைத்து ஆண்டுகளும்',
+    filterSaved: 'சேமிக்கப்பட்டவை',
+    filterSavedTitle: 'உங்கள் தனிப்பட்ட சேமித்த பதிவுகளைக் காண்க',
+    emptyLoading: 'மேகக்கணி தரவுத்தளத்திலிருந்து பதிவுகள் ஏற்றப்படுகின்றன…',
+    emptyNoEntries: '{year}-ல் பதிவுகள் எதுவும் கிடைக்கவில்லை.',
+    emptySearchMatch: '"{term}" என்பதற்கு பொருந்தும் பதிவுகள் {year}-ல் எதுவும் கிடைக்கவில்லை.',
+    emptySavedTitle: 'சேமிக்கப்பட்ட பதிவுகள் எதுவும் இல்லை',
+    emptySavedDesc: 'தனிப்பட்ட முறையில் படிக்க விரும்பும் எந்தவொரு பதிவிலும் உள்ள 🔖 புத்தகக்குறி ஐகானைத் தட்டவும். இந்த சாதனத்தில் நீங்கள் மட்டுமே அவற்றைப் பார்க்க முடியும்.',
+    btnLike: 'விருப்பம்',
+    btnLiked: 'விருப்பமானது',
+    btnShare: 'பகிரவும்',
+    btnSave: 'சேமி',
+    btnSaved: 'சேமிக்கப்பட்டது',
+    btnEdit: 'திருத்து',
+    btnDelete: 'நீக்கு',
+    btnReadMore: 'மேலும் படிக்க',
+    btnShowLess: 'சுருக்கிக் காட்டவும்',
+    badgeEntry: 'பதிவு',
+    badgeEntries: 'பதிவுகள்',
+    footerText: 'உருவாக்கம் மற்றும் எழுத்து: R Rajkumar Padmanabhan. Unfiltered Journal.',
+    settingsModalTitle: '⚙ செயலி விருப்பங்கள் & தீம்கள்',
+    settingsSubtitle: 'உங்கள் வாசிப்பு அனுபவத்தையும் பாணிகளையும் தனிப்பயனாக்குங்கள்',
+    settingsLangHeading: 'மொழி',
+    settingsLangHint: 'மொழியைத் தேர்ந்தெடுக்கவும்',
+    settingsThemeHeading: 'வண்ண தீம்கள்',
+    settingsThemeHint: 'தீமைத் தேர்ந்தெடுக்கவும்',
+    settingsActionsHeading: 'விரைவு செயல்கள்',
+    settingsNotifyLabel: 'பதிவு அறிவிப்புகள்',
+    settingsNotifyDesc: 'புதிய பதிவுகள் வெளியிடப்படும்போது உடனடியாக அறிந்துகொள்ளுங்கள்',
+    settingsNotifyEnable: 'இயக்கு',
+    settingsNotifySubscribed: 'செயலில் உள்ளது ✓',
+    settingsUpdateLabel: 'செயலி புதுப்பிப்பு',
+    settingsUpdateDesc: 'நீங்கள் சமீபத்திய பதிப்பைப் பயன்படுத்துகிறீர்கள்',
+    settingsUpdateBadge: 'புதுப்பித்த நிலையில் உள்ளது',
+    settingsUpdateLatestBadge: 'புதுப்பித்த நிலையில் உள்ளது ✓',
+    settingsAppName: 'Unfiltered Journal',
+    settingsAppVersion: 'பதிப்பு 1.0.0 • By R Rajkumar Padmanabhan',
+    profileRole: 'மென்பொருள் உருவாக்குநர் & எழுத்தாளர்',
+    profileEmailBtn: 'மின்னஞ்சல் செய்க',
     toastLangChanged: 'மொழி தமிழுக்கு மாற்றப்பட்டது ✨',
     toastNotifyMuted: '🔕 அறிவிப்புகள் முடக்கப்பட்டன.',
     toastNotifySubscribed: '🔔 இணைக்கப்பட்டது! புதிய பதிவுகள் வரும்போது அறிவிப்பு வரும்.',
-    notifWelcomeTitle: 'அன்ஃபில்டர்டு ஜர்னல்',
+    toastSaved: '🔖 வாசிப்புப் பட்டியலில் சேமிக்கப்பட்டது',
+    toastUnsaved: 'சேமிக்கப்பட்டவற்றிலிருந்து நீக்கப்பட்டது',
+    toastLinkCopied: 'இணைப்பு நகலெடுக்கப்பட்டது!',
+    toastUpdateApp: '✨ நீங்கள் Unfiltered Journal-ன் சமீபத்திய பதிப்பைப் பயன்படுத்துகிறீர்கள்.',
+    notifWelcomeTitle: 'Unfiltered Journal',
     notifWelcomeBody: 'அறிவிப்புகள் இயக்கப்பட்டன! புதிய பதிவுகள் வெளியிடப்படும்போது உங்களுக்குத் தெரிவிக்கப்படும்.',
     toastNewPost: '📝 புதிய பதிவு: "{title}"',
     notifNewPostTitle: 'புதிய பதிவு: {title}',
-    notifNewPostBody: 'ஒரு புதிய ஜர்னல் பதிவு வெளியிடப்பட்டுள்ளது.'
+    notifNewPostBody: 'ஒரு புதிய ஜர்னல் பதிவு வெளியிடப்பட்டுள்ளது.',
+    months: ['ஜனவரி', 'பிப்ரவரி', 'மார்ச்', 'ஏப்ரல்', 'மே', 'ஜூன்', 'ஜூலை', 'ஆகஸ்ட்', 'செப்டம்பர்', 'அக்டோபர்', 'நவம்பர்', 'டிசம்பர்'],
+    monthsShort: ['ஜன', 'பிப்', 'மார்', 'ஏப்', 'மே', 'ஜூன்', 'ஜூலை', 'ஆக', 'செப்', 'அக்', 'நவ', 'டிச']
   }
 };
 
@@ -208,13 +371,113 @@ function applyLanguage(langId, notify = false) {
     document.body.setAttribute('lang', lang);
   }
 
-  // ONLY change the Quote of the Day in the sidebar
+  // 1. Sidebar Quote & About
+  const quoteHeader = document.getElementById('quote-header');
+  if (quoteHeader) quoteHeader.textContent = t.quoteHeader;
+
   const quoteText = document.getElementById('quote-text');
-  if (quoteText) {
-    quoteText.innerHTML = t.quoteHtml;
+  if (quoteText) quoteText.innerHTML = t.quoteHtml;
+
+  const aboutHeader = document.getElementById('about-header');
+  if (aboutHeader) aboutHeader.textContent = t.aboutHeader;
+
+  const aboutText = document.getElementById('about-text');
+  if (aboutText) aboutText.textContent = t.aboutText;
+
+  const metaBasedLabel = document.getElementById('meta-based-label');
+  if (metaBasedLabel) metaBasedLabel.textContent = t.metaBasedLabel;
+
+  const metaBasedValue = document.getElementById('meta-based-value');
+  if (metaBasedValue) metaBasedValue.textContent = t.metaBasedValue;
+
+  const metaJoinedLabel = document.getElementById('meta-joined-label');
+  if (metaJoinedLabel) metaJoinedLabel.textContent = t.metaJoinedLabel;
+
+  const metaEntriesLabel = document.getElementById('meta-entries-label');
+  if (metaEntriesLabel) metaEntriesLabel.textContent = t.metaEntriesLabel;
+
+  // 2. Search & Sort (Notice: feed-title-text "Unfiltered Journal" is kept unchanged)
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.placeholder = t.searchPlaceholder;
+    searchInput.setAttribute('aria-label', t.searchPlaceholder);
   }
 
+  const feedSortLabel = document.getElementById('feed-sort-label');
+  if (feedSortLabel) feedSortLabel.textContent = t.feedSortLabel;
+
+  // 3. Filter Pills
+  const filterPillAll = document.getElementById('filter-pill-all');
+  if (filterPillAll) filterPillAll.textContent = t.filterAll;
+
+  const savedPillLabel = document.getElementById('saved-pill-label');
+  if (savedPillLabel) savedPillLabel.textContent = t.filterSaved;
+
+  const filterPillSaved = document.getElementById('filter-pill-saved');
+  if (filterPillSaved) filterPillSaved.setAttribute('title', t.filterSavedTitle);
+
+  // 4. Loading Empty State
+  const emptyLoading = document.getElementById('empty-state-loading');
+  if (emptyLoading) emptyLoading.textContent = t.emptyLoading;
+
+  // 5. Site Footer (Preserving R Rajkumar Padmanabhan & Unfiltered Journal)
+  const siteFooterText = document.getElementById('site-footer-text');
+  if (siteFooterText) siteFooterText.textContent = t.footerText;
+
+  // 6. Settings Modal Content
+  const settingsModalTitle = document.getElementById('settings-modal-title');
+  if (settingsModalTitle) settingsModalTitle.textContent = t.settingsModalTitle;
+
+  const settingsSubtitle = document.getElementById('settings-subtitle');
+  if (settingsSubtitle) settingsSubtitle.textContent = t.settingsSubtitle;
+
+  const settingsLangHeading = document.getElementById('settings-lang-heading');
+  if (settingsLangHeading) settingsLangHeading.textContent = t.settingsLangHeading;
+
+  const settingsLangHint = document.getElementById('settings-lang-hint');
+  if (settingsLangHint) settingsLangHint.textContent = t.settingsLangHint;
+
+  const settingsThemeHeading = document.getElementById('settings-theme-heading');
+  if (settingsThemeHeading) settingsThemeHeading.textContent = t.settingsThemeHeading;
+
+  const settingsThemeHint = document.getElementById('settings-theme-hint');
+  if (settingsThemeHint) settingsThemeHint.textContent = t.settingsThemeHint;
+
+  const settingsActionsHeading = document.getElementById('settings-actions-heading');
+  if (settingsActionsHeading) settingsActionsHeading.textContent = t.settingsActionsHeading;
+
+  const settingsNotifyLabel = document.getElementById('settings-notify-label');
+  if (settingsNotifyLabel) settingsNotifyLabel.textContent = t.settingsNotifyLabel;
+
+  const settingsNotifyDesc = document.getElementById('settings-notify-desc');
+  if (settingsNotifyDesc) settingsNotifyDesc.textContent = t.settingsNotifyDesc;
+
+  const settingsUpdateLabel = document.getElementById('settings-update-label');
+  if (settingsUpdateLabel) settingsUpdateLabel.textContent = t.settingsUpdateLabel;
+
+  const settingsUpdateDesc = document.getElementById('settings-update-desc');
+  if (settingsUpdateDesc) settingsUpdateDesc.textContent = t.settingsUpdateDesc;
+
+  const settingsUpdateBadge = document.getElementById('settings-update-badge');
+  if (settingsUpdateBadge) settingsUpdateBadge.textContent = t.settingsUpdateBadge;
+
+  const settingsAppVersion = document.getElementById('settings-app-version');
+  if (settingsAppVersion) settingsAppVersion.textContent = t.settingsAppVersion;
+
+  // 7. Profile Modal
+  const profileRole = document.getElementById('profile-modal-role');
+  if (profileRole) profileRole.textContent = t.profileRole;
+
+  const profileEmail = document.getElementById('profile-link-email');
+  if (profileEmail) profileEmail.textContent = t.profileEmailBtn;
+
+  // 8. Re-render Language Grid in Settings
   renderLanguagePickerGrid(lang);
+
+  // 9. Re-render posts feed so that all date labels, section headers, badges, and action buttons update
+  if (postStates && postStates.length > 0) {
+    applySearchOrRender();
+  }
 
   if (notify) {
     showToast(t.toastLangChanged);
@@ -228,7 +491,7 @@ async function initApp() {
   setupProfileModal();
 
   const aboutEl = document.getElementById('about-text');
-  if (window.SITE_ABOUT && aboutEl) {
+  if (window.SITE_ABOUT && aboutEl && getCurrentLanguage() === 'en') {
     aboutEl.textContent = window.SITE_ABOUT;
   }
 
@@ -344,9 +607,10 @@ function setupSettingsModal() {
   if (!settingsModal) return;
 
   function updateNotifyBadge() {
+    const t = getCurrentLangDict();
     const isSubscribed = localStorage.getItem(STORAGE_PREFIX + 'notify') === 'true';
     if (notifyBadge) {
-      notifyBadge.textContent = isSubscribed ? 'Subscribed ✓' : 'Enable';
+      notifyBadge.textContent = isSubscribed ? (t.settingsNotifySubscribed || 'Subscribed ✓') : (t.settingsNotifyEnable || 'Enable');
       notifyBadge.classList.toggle('is-subscribed', isSubscribed);
     }
   }
@@ -399,10 +663,11 @@ function setupSettingsModal() {
   if (updateAppBtn) {
     updateAppBtn.addEventListener('click', () => {
       triggerHaptic('LIGHT');
+      const t = getCurrentLangDict();
       if (updateBadge) {
-        updateBadge.textContent = 'Up to date ✓';
+        updateBadge.textContent = t.settingsUpdateLatestBadge || 'Up to date ✓';
       }
-      showToast('✨ You are running the latest version of Unfiltered Journal.');
+      showToast(t.toastUpdateApp || '✨ You are running the latest version of Unfiltered Journal.');
     });
   }
 }
@@ -644,6 +909,7 @@ function matchesSearch(post, term) {
 function renderList(states, term) {
   const postsEl = document.getElementById('posts');
   if (!postsEl) return;
+  const t = getCurrentLangDict();
 
   // Filter by active year pill if selected (All, 2026, 2025, Saved)
   const activePill = document.querySelector('.filter-pill.is-active');
@@ -662,16 +928,22 @@ function renderList(states, term) {
       postsEl.innerHTML = `
         <div class="empty-saved-state">
           <div class="empty-saved-icon">🔖</div>
-          <h3>No saved stories yet</h3>
-          <p>Tap the bookmark icon on any journal entry to save it to your private reading list. Only you can view your saved entries on this device.</p>
+          <h3>${escapeHtml(t.emptySavedTitle || 'No saved stories yet')}</h3>
+          <p>${escapeHtml(t.emptySavedDesc || 'Tap the bookmark icon on any journal entry to save it to your private reading list. Only you can view your saved entries on this device.')}</p>
         </div>
       `;
       return;
     }
+    const yearDisplay = selectedYear === 'all' ? (t.filterAll || 'All Years') : selectedYear;
     if (term) {
-      postsEl.innerHTML = `<p class="empty-state">No entries match "${escapeHtml(term)}" in ${selectedYear === 'all' ? 'journal' : selectedYear}.</p>`;
+      const matchMsg = (t.emptySearchMatch || 'No entries match "{term}" in {year}.')
+        .replace('{term}', escapeHtml(term))
+        .replace('{year}', escapeHtml(yearDisplay));
+      postsEl.innerHTML = `<p class="empty-state">${matchMsg}</p>`;
     } else {
-      postsEl.innerHTML = `<p class="empty-state">No journal entries found for ${escapeHtml(selectedYear)}.</p>`;
+      const noEntriesMsg = (t.emptyNoEntries || 'No journal entries found for {year}.')
+        .replace('{year}', escapeHtml(yearDisplay));
+      postsEl.innerHTML = `<p class="empty-state">${noEntriesMsg}</p>`;
     }
     return;
   }
@@ -694,11 +966,12 @@ function renderList(states, term) {
       lastPeriod = period;
       const label = getMonthYearLabel(s.post.date);
       const count = periodCounts[period] || 1;
+      const badgeText = count === 1 ? (t.badgeEntry || 'entry') : (t.badgeEntries || 'entries');
       htmlParts.push(`
         <div class="month-section-header" data-period="${escapeAttr(period)}">
           <span class="month-section-title">${escapeHtml(label)}</span>
           <span class="month-section-line"></span>
-          <span class="month-section-badge">${count} ${count === 1 ? 'entry' : 'entries'}</span>
+          <span class="month-section-badge">${count} ${badgeText}</span>
         </div>
       `);
     }
@@ -711,6 +984,7 @@ function renderList(states, term) {
 
 function renderPost(state) {
   const { post, slug, liked, saved } = state;
+  const t = getCurrentLangDict();
   const dateLabel = formatDate(post.date);
   const tags = (post.tags || [])
     .map(tItem => `<span>${escapeHtml(tItem)}</span>`)
@@ -730,36 +1004,36 @@ function renderPost(state) {
         <!-- Public: Like Button -->
         <button class="action-btn like-btn ${liked ? 'is-active' : ''}" data-id="${escapeAttr(post.id || '')}" data-slug="${escapeAttr(slug)}" aria-pressed="${liked}">
           <span class="icon">${liked ? '♥' : '♡'}</span>
-          <span class="label">Like</span>
+          <span class="label">${liked ? (t.btnLiked || 'Liked') : (t.btnLike || 'Like')}</span>
         </button>
 
         <!-- Public: Share Button -->
         <button class="action-btn share-btn" data-id="${escapeAttr(post.id || '')}" data-slug="${escapeAttr(slug)}">
           <span class="icon">⤴</span>
-          <span class="label">Share</span>
+          <span class="label">${t.btnShare || 'Share'}</span>
         </button>
 
         <!-- Public: Save / Bookmark Button (Private to this user/device) -->
-        <button class="action-btn save-btn ${saved ? 'is-active is-saved' : ''}" data-id="${escapeAttr(post.id || '')}" data-slug="${escapeAttr(slug)}" aria-pressed="${saved ? 'true' : 'false'}" title="${saved ? 'Remove from saved' : 'Save this story'}">
+        <button class="action-btn save-btn ${saved ? 'is-active is-saved' : ''}" data-id="${escapeAttr(post.id || '')}" data-slug="${escapeAttr(slug)}" aria-pressed="${saved ? 'true' : 'false'}" title="${saved ? (t.btnSaved || 'Saved') : (t.btnSave || 'Save')}">
           <span class="icon">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="${saved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
             </svg>
           </span>
-          <span class="label">${saved ? 'Saved' : 'Save'}</span>
+          <span class="label">${saved ? (t.btnSaved || 'Saved') : (t.btnSave || 'Save')}</span>
         </button>
 
         ${post.isFirestore && post.id ? `
         <!-- Admin Only: Edit Uploaded Post -->
         <button class="action-btn edit-btn" data-id="${escapeAttr(post.id)}" title="Edit uploaded entry">
           <span class="icon">✏</span>
-          <span class="label">Edit</span>
+          <span class="label">${t.btnEdit || 'Edit'}</span>
         </button>
 
         <!-- Admin Only: Delete Uploaded Post -->
         <button class="action-btn delete-btn" data-id="${escapeAttr(post.id)}" title="Delete uploaded entry">
           <span class="icon">🗑</span>
-          <span class="label">Delete</span>
+          <span class="label">${t.btnDelete || 'Delete'}</span>
         </button>
         ` : ''}
       </div>
@@ -782,6 +1056,7 @@ function attachPostHandlers(state) {
   if (likeBtn) {
     likeBtn.addEventListener('click', async () => {
       triggerHaptic('LIGHT');
+      const t = getCurrentLangDict();
       state.liked = !state.liked;
       localStorage.setItem(STORAGE_PREFIX + 'liked:' + slug, String(state.liked));
 
@@ -789,6 +1064,10 @@ function attachPostHandlers(state) {
       likeBtn.classList.toggle('is-active', state.liked);
       likeBtn.setAttribute('aria-pressed', String(state.liked));
       likeBtn.querySelector('.icon').textContent = state.liked ? '♥' : '♡';
+      const likeLabel = likeBtn.querySelector('.label');
+      if (likeLabel) {
+        likeLabel.textContent = state.liked ? (t.btnLiked || 'Liked') : (t.btnLike || 'Like');
+      }
 
       if (post.id && post.isFirestore) {
         try {
@@ -806,6 +1085,7 @@ function attachPostHandlers(state) {
   if (shareBtn) {
     shareBtn.addEventListener('click', async () => {
       triggerHaptic('LIGHT');
+      const t = getCurrentLangDict();
 
       const url = window.location.href.split('#')[0] + '#' + slug;
       const title = post.title || document.title;
@@ -833,7 +1113,7 @@ function attachPostHandlers(state) {
       if (navigator.clipboard) {
         try {
           await navigator.clipboard.writeText(url);
-          flashLabel(shareBtn, 'Link Copied!');
+          flashLabel(shareBtn, t.toastLinkCopied || 'Link Copied!');
         } catch (e) { /* fallback */ }
       }
     });
@@ -844,21 +1124,22 @@ function attachPostHandlers(state) {
   if (saveBtn) {
     saveBtn.addEventListener('click', () => {
       triggerHaptic('LIGHT');
+      const t = getCurrentLangDict();
       const nowSaved = toggleSavedSlug(slug);
       state.saved = nowSaved;
 
       saveBtn.classList.toggle('is-active', nowSaved);
       saveBtn.classList.toggle('is-saved', nowSaved);
       saveBtn.setAttribute('aria-pressed', String(nowSaved));
-      saveBtn.setAttribute('title', nowSaved ? 'Remove from saved' : 'Save this story');
+      saveBtn.setAttribute('title', nowSaved ? (t.btnSaved || 'Saved') : (t.btnSave || 'Save'));
 
       const label = saveBtn.querySelector('.label');
-      if (label) label.textContent = nowSaved ? 'Saved' : 'Save';
+      if (label) label.textContent = nowSaved ? (t.btnSaved || 'Saved') : (t.btnSave || 'Save');
 
       const svg = saveBtn.querySelector('svg');
       if (svg) svg.setAttribute('fill', nowSaved ? 'currentColor' : 'none');
 
-      showToast(nowSaved ? '🔖 Saved to your reading list' : 'Removed from saved stories');
+      showToast(nowSaved ? (t.toastSaved || '🔖 Saved to your reading list') : (t.toastUnsaved || 'Removed from saved stories'));
       updateSavedCountBadge();
 
       // If viewing the saved tab, dynamically re-render to reflect instant unsave
@@ -1287,12 +1568,25 @@ const MONTH_SHORT = [
 function formatDate(dateStr) {
   const p = parseDateParts(dateStr);
   if (!p) return dateStr || '';
+  const lang = getCurrentLanguage();
+  const t = getCurrentLangDict();
+  if (lang === 'ml') {
+    const month = (t.monthsShort && t.monthsShort[p.month - 1]) || (t.months && t.months[p.month - 1]) || MONTH_SHORT[p.month - 1];
+    return `${p.year} ${month} ${p.day}`;
+  } else if (lang === 'ta') {
+    const month = (t.monthsShort && t.monthsShort[p.month - 1]) || (t.months && t.months[p.month - 1]) || MONTH_SHORT[p.month - 1];
+    return `${month} ${p.day}, ${p.year}`;
+  }
   return `${MONTH_SHORT[p.month - 1]} ${p.day}, ${p.year}`;
 }
 
 function getMonthYearLabel(dateStr) {
   const p = parseDateParts(dateStr);
   if (!p) return '';
+  const t = getCurrentLangDict();
+  if (t.months && t.months[p.month - 1]) {
+    return `${t.months[p.month - 1]} ${p.year}`;
+  }
   return `${MONTH_NAMES[p.month - 1]} ${p.year}`;
 }
 
