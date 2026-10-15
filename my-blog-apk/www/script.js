@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword, 
   signOut, 
   onAuthStateChanged, 
+  sendPasswordResetEmail, 
   collection, 
   addDoc, 
   deleteDoc, 
@@ -1371,11 +1372,46 @@ function setupAdminControls() {
         cleanupDuplicateFirestorePosts(true);
       } catch (err) {
         console.error("Admin sign in failed:", err);
-        showToast("⛔ Access denied or invalid credentials.");
+        const errMsg = err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password'
+          ? "⛔ Invalid password. Click 'Forgot Password?' below to reset it."
+          : "⛔ Access denied: " + (err.message || 'Invalid credentials');
+        showToast(errMsg, 4500);
         triggerHaptic('ERROR');
       } finally {
         btnLogin.disabled = false;
         btnLogin.textContent = "Sign In";
+      }
+    });
+  }
+
+  // Owner Password Reset Email
+  const btnForgot = document.getElementById("btn-admin-forgot");
+  if (btnForgot) {
+    btnForgot.addEventListener("click", async () => {
+      triggerHaptic('LIGHT');
+      const email = (emailInput ? emailInput.value : "").trim();
+      if (!email) {
+        showToast("⚠️ Enter your admin email first to receive a password reset link.");
+        if (emailInput) emailInput.focus();
+        return;
+      }
+      if (!isAllowedAdmin(email)) {
+        showToast("⛔ Only authorized admin accounts can request password reset.");
+        return;
+      }
+      try {
+        btnForgot.disabled = true;
+        btnForgot.textContent = "Sending link...";
+        await sendPasswordResetEmail(auth, email);
+        showToast("📧 Password reset link sent to " + email);
+        triggerHaptic('SUCCESS');
+      } catch (err) {
+        console.error("Password reset error:", err);
+        showToast("⚠️ Failed to send reset email: " + (err.message || 'Error'));
+        triggerHaptic('ERROR');
+      } finally {
+        btnForgot.disabled = false;
+        btnForgot.textContent = "Forgot Password? (Send Reset Link)";
       }
     });
   }
