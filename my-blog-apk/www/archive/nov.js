@@ -60,5 +60,68 @@ window.SITE_POSTS.push(
   "body": "Another month quietly disappears behind me. I have fewer answers than I expected, but more strength than I knew I had—and perhaps that's enough.",
   "image": "",
   "tags": ["reflection"]
+},
+// ===============================
+// November 2026
+// ===============================
+{
+  "date": "2026-11-01",
+  "title": "Voyager: A Message Across the Universe",
+  "body": "NASA's Voyager spacecraft continue their journey through interstellar space, far beyond the planets. Their signals take many hours to travel between Earth and the spacecraft. These missions carry information about the distant environment beyond our Solar System and represent one of humanity's longest-running explorations.",
+  "image": "",
+  "tags": [
+    "NASA",
+    "Voyager",
+    "exploration"
+  ]
+},
+{
+  "date": "2026-11-02",
+  "title": "A Little More Open",
+  "body": "I've realized that listening doesn't always mean preparing a response. Sometimes it's allowing another person's experience to exist without comparing it to my own. There is so much we can learn when we make room for perspectives beyond ours.",
+  "image": "",
+  "tags": [
+    "listening"
+  ]
+},
+{
+  "date": "2026-11-03",
+  "title": "Why Some Stars Look Red",
+  "body": "The colour of a star provides clues about its temperature. Blue stars are generally hotter, while red stars are cooler at their surfaces. By studying starlight, astronomers can estimate temperature, composition, motion, and other properties without ever travelling to the star. Light itself becomes a scientific instrument.",
+  "image": "",
+  "tags": [
+    "stars",
+    "physics",
+    "science"
+  ]
+},
+{
+  "date": "2026-11-04",
+  "title": "The Joy of Making Something",
+  "body": "There is a special feeling in turning an idea into something that didn't exist before. It might be a drawing, a few lines of code, or something made with my hands. The result doesn't have to be perfect for the process to feel worthwhile.",
+  "image": "",
+  "tags": [
+    "creation"
+  ]
+},
+{
+  "date": "2026-11-05",
+  "title": "The Taurid Meteor Showers Begin",
+  "body": "November brings the Taurid meteor showers, known for occasional bright fireballs that can appear unexpectedly in the night sky. Unlike some showers that produce many faint meteors, the Taurids are famous for their slower and sometimes unusually brilliant streaks. Looking up at the night sky is a reminder that Earth constantly moves through ancient cosmic debris.",
+  "image": "",
+  "tags": [
+    "Taurids",
+    "meteor-shower",
+    "space"
+  ]
+},
+{
+  "date": "2026-11-05",
+  "title": "A Moment Outside the Routine",
+  "body": "Maybe we don't always need a big change to feel something different. Taking another route, trying something unfamiliar, or simply paying attention to what we usually ignore can make an ordinary day feel like a new experience.",
+  "image": "",
+  "tags": [
+    "experience"
+  ]
 }
 );
